@@ -57,3 +57,5 @@ Iy = Isc(2,2);
 Iz = Isc(3,3);
 
 K_Bdot = 1000;
+Max_magmom = 0.2;
+Min_magmom = -0.2;
