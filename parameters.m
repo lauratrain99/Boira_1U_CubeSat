@@ -46,8 +46,8 @@ q0 = angle2quat(0,0,0,'ZYX');
 % Iz>Iy, Iz>Ix stable configuration. h>w>d
 % geometric dimensions of the S/C
 m = 2;
-w = 0.11;
-h = 0.09;
+w = 0.1;
+h = 0.1;
 d = 0.1;
 
 % inertia tensor of the S/C
@@ -60,9 +60,26 @@ K_Bdot = 1000;
 Max_magmom = 0.2;
 Min_magmom = -0.2;
 
-% Gyroscope ADXRS614
+% IMU ADIS16460
+misalign = 0.05; %deg
+max_ref_temp = 70; %ºC
+
+gyro.full_scale = 100; %deg/s
+gyro.bias_ins = 8/3600; %deg/s
+gyro.power_noise = ([0.12,0.17,0.17]/60).^2; %(deg/s)^2/Hz
+gyro.quantization = 7.63e-8; %deg/s
+gyro.temp_bias = 0.007; %deg/s/ºC
+
+acc.full_scale = 5; %g
+acc.bias_ins = 0.2/1000; %g
+acc.power_noise = ([0.09,0.09,0.09]/(60*9.81)).^2; %g^2/Hz
+acc.quantization = 0.25/1000; %g
+acc.temp_bias = 0.05/1000;%g/ºC
 
 
-
-
+%IMU
+noiseAcc =(0.07/(60*9.81))^2; %g^2/Hz
+noiseAng =(0.15/60)^2; %(deg/s)^2/Hz
+biasAcc = ((0.00004)^2)/(2*pi); %g^2
+biasAng = ((0.3/3600)^2)/(2*pi);%(deg/s)^2
 
