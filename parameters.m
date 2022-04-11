@@ -46,8 +46,8 @@ q0 = angle2quat(0,0,0,'ZYX');
 % Iz>Iy, Iz>Ix stable configuration. h>w>d
 % geometric dimensions of the S/C
 m = 2;
-w = 0.1;
-h = 0.1;
+w = 0.11;
+h = 0.09;
 d = 0.1;
 
 % inertia tensor of the S/C
@@ -59,3 +59,10 @@ Iz = Isc(3,3);
 K_Bdot = 1000;
 Max_magmom = 0.2;
 Min_magmom = -0.2;
+
+% Gyroscope ADXRS614
+
+
+
+
+
