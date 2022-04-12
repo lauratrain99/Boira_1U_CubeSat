@@ -35,8 +35,8 @@ delta = deg2rad(2);                             % Solar declination
 eps = 0;                                        % Equation of time
 
 % Orbit requirements 
-rep_days = 7;                                   % Repating groundtrack cycle in days
-rev_day = 16.191;                               % Needed revolutions per day
+rep_days = 2;                                   % Repating groundtrack cycle in days
+rev_day = 16;                               % Needed revolutions per day
 LTAN = 6;                                      % Mean Local Time of the Ascending Node
 phi = deg2rad(40.304665);                       % Latitude of interest for the LTAN
 
@@ -53,7 +53,7 @@ elements(5) = omega_d;
 % Groundtrack requirements
 P = 86400/rev_day;                              % Nodal period
 a_d = (sqrt(mu)*P/(2*pi))^(2/3);                % Desired orbital SMA
-a_d = Re+600e3;                                 % Desired orbital SMA
+a_d = Re+522e3;                                 % Desired orbital SMA
 
 elements(1) = a_d; 
 
