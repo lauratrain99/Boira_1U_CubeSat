@@ -22,13 +22,9 @@ theta = 0;
 r0 = r0*1000;
 v0 = v0*1000;
 
-
 % orbital period
 Torb = 2*pi*sqrt(norm(r0)^3/mu);
 
-% position and velocity -> assume Equatorial circular orbit
-% r0 = [rmag; 0; 0];
-% v0 = [1; sqrt(mu/rmag) + 1; 1];
 year = 2024;
 month = 1;
 day = 1;
@@ -37,7 +33,7 @@ min = 1;
 sec = 1;
 t0 = [year,month,day,hour,min,sec];
 
-% assume a perturbation a 1% perturbation wrt Z axis angular velocity
+% initial angular velocity from launcher deploy
 wx = 5; wy = -3; wz = 4;
 w0 = deg2rad([wx; wy; wz]);
 q0 = angle2quat(0,0,0,'ZYX');
@@ -51,14 +47,20 @@ h = 0.1;
 d = 0.1;
 
 % inertia tensor of the S/C
-Isc = [m/12 * (h^2 + d^2), 0, 0; 0, m/12 * (w^2 + d^2), 0; 0, 0, m/12 * (h^2 + w^2)];
-Ix = Isc(1,1);
-Iy = Isc(2,2);
-Iz = Isc(3,3);
+Ix = m/12 * (h^2 + d^2);
+Iy = m/12 * (w^2 + d^2);
+Iz = m/12 * (h^2 + w^2);
+Ixy = 0;
+Ixz = 0;
+Iyz = 0;
+Isc = [Ix, Ixy, Ixz; Ixy, Iy, Iyz; Ixz, Iyz, Iz];
 
+% Controller gain
 K_Bdot = 1000;
-Max_magmom = 0.2;
-Min_magmom = -0.2;
+
+% Maximum and minimum magnetic moment: magnetorquer
+Max_magmom = 0.2; %Am^2
+Min_magmom = -0.2; %Am^2
 
 % IMU ADIS16460
 misalign = 0.05; %deg
@@ -77,9 +79,8 @@ acc.quantization = 0.25/1000; %g
 acc.temp_bias = 0.05/1000;%g/ºC
 
 
-%IMU
-noiseAcc =(0.07/(60*9.81))^2; %g^2/Hz
-noiseAng =(0.15/60)^2; %(deg/s)^2/Hz
-biasAcc = ((0.00004)^2)/(2*pi); %g^2
-biasAng = ((0.3/3600)^2)/(2*pi);%(deg/s)^2
+mag.temp_bias = -0.3/100; % %/ºC
+mag.quantization = 4.35e-3; % Gauss
+mag.power_noise = ([2e-3,2e-3,2e-3]).^2; %Gauss^2/Hz
+
 
