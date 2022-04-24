@@ -33,6 +33,7 @@ index = index(end);
 
 fprintf('Minimum eclipse duration: %.2f min \n ', min_duration/60);
 fprintf('Maximum eclipse duration: %.2f min \n', max_duration/60);
+fprintf('Medium eclipse duration: %.2f min \n', mean(duration)/60);
 
 %% Results
 figure(1) 

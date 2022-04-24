@@ -1,5 +1,5 @@
 %General Mission Analysis Tool(GMAT) Script
-%Created: 2022-04-18 21:17:14
+%Created: 2022-04-18 22:43:58
 
 
 %----------------------------------------
@@ -57,7 +57,6 @@ GMAT Boira.EulerAngleSequence = '321';
 Create ForceModel DefaultProp_ForceModel;
 GMAT DefaultProp_ForceModel.CentralBody = Earth;
 GMAT DefaultProp_ForceModel.PrimaryBodies = {Earth};
-GMAT DefaultProp_ForceModel.Drag = None;
 GMAT DefaultProp_ForceModel.SRP = Off;
 GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
 GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
@@ -66,6 +65,17 @@ GMAT DefaultProp_ForceModel.GravityField.Earth.Order = 4;
 GMAT DefaultProp_ForceModel.GravityField.Earth.StmLimit = 100;
 GMAT DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
 GMAT DefaultProp_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT DefaultProp_ForceModel.Drag.AtmosphereModel = MSISE90;
+GMAT DefaultProp_ForceModel.Drag.HistoricWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT DefaultProp_ForceModel.Drag.PredictedWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT DefaultProp_ForceModel.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+GMAT DefaultProp_ForceModel.Drag.SchattenFile = 'SchattenPredict.txt';
+GMAT DefaultProp_ForceModel.Drag.F107 = 150;
+GMAT DefaultProp_ForceModel.Drag.F107A = 150;
+GMAT DefaultProp_ForceModel.Drag.MagneticIndex = 3;
+GMAT DefaultProp_ForceModel.Drag.SchattenErrorModel = 'Nominal';
+GMAT DefaultProp_ForceModel.Drag.SchattenTimingModel = 'NominalCycle';
+GMAT DefaultProp_ForceModel.Drag.DragModel = 'Spherical';
 
 %----------------------------------------
 %---------- Propagators
@@ -82,14 +92,33 @@ GMAT DefaultProp.MaxStepAttempts = 50;
 GMAT DefaultProp.StopIfAccuracyIsViolated = true;
 
 %----------------------------------------
+%---------- EventLocators
+%----------------------------------------
+
+Create EclipseLocator Eclipses;
+GMAT Eclipses.Spacecraft = Boira;
+GMAT Eclipses.Filename = 'C:\Users\sergi\OneDrive\Documentos\GitHub\Boira_1U_CubeSat\mission analysis\GMAT Scenarios\eclipse_report';
+GMAT Eclipses.OccultingBodies = {Earth};
+GMAT Eclipses.InputEpochFormat = 'TAIModJulian';
+GMAT Eclipses.InitialEpoch = '21545';
+GMAT Eclipses.StepSize = 10;
+GMAT Eclipses.FinalEpoch = '21545.138';
+GMAT Eclipses.UseLightTimeDelay = true;
+GMAT Eclipses.UseStellarAberration = true;
+GMAT Eclipses.WriteReport = true;
+GMAT Eclipses.RunMode = Automatic;
+GMAT Eclipses.UseEntireInterval = true;
+GMAT Eclipses.EclipseTypes = {'Umbra', 'Penumbra', 'Antumbra'};
+
+%----------------------------------------
 %---------- Subscribers
 %----------------------------------------
 
 Create OrbitView DefaultOrbitView;
 GMAT DefaultOrbitView.SolverIterations = Current;
-GMAT DefaultOrbitView.UpperLeft = [ 0 0 ];
-GMAT DefaultOrbitView.Size = [ 0 0 ];
-GMAT DefaultOrbitView.RelativeZOrder = 0;
+GMAT DefaultOrbitView.UpperLeft = [ 0.002941176470588235 0 ];
+GMAT DefaultOrbitView.Size = [ 0.5 0.4502487562189055 ];
+GMAT DefaultOrbitView.RelativeZOrder = 42;
 GMAT DefaultOrbitView.Maximized = false;
 GMAT DefaultOrbitView.Add = {Boira, Earth};
 GMAT DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
@@ -119,9 +148,9 @@ GMAT DefaultOrbitView.EnableConstellations = On;
 
 Create GroundTrackPlot DefaultGroundTrackPlot;
 GMAT DefaultGroundTrackPlot.SolverIterations = Current;
-GMAT DefaultGroundTrackPlot.UpperLeft = [ 0 0 ];
-GMAT DefaultGroundTrackPlot.Size = [ 0 0 ];
-GMAT DefaultGroundTrackPlot.RelativeZOrder = 0;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.002941176470588235 0.4552238805970149 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.5 0.4502487562189055 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 40;
 GMAT DefaultGroundTrackPlot.Maximized = false;
 GMAT DefaultGroundTrackPlot.Add = {Boira};
 GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
@@ -138,4 +167,4 @@ GMAT DefaultGroundTrackPlot.TextureMap = 'ModifiedBlueMarble.jpg';
 %----------------------------------------
 
 BeginMissionSequence;
-Propagate DefaultProp(Boira) {Boira.ElapsedSecs = 12000.0};
+Propagate 'Mission' DefaultProp(Boira) {Boira.Earth.RMAG = 6500};
