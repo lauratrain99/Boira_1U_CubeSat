@@ -12,111 +12,139 @@
 
 set_graphics();
 
-%% Initial data and orbit requirements 
-%Earth data
-mu = 3.986e14;                                  %Earth gravitational parameter
-J2 = 1.08263e-3;                                %Second zonal harmonic of the Earth
-a_e = 6378.14e3;                                %Mean Earth radius
-SolarYear = 365.242199;                         %Solar year
-tau = (3600*24)*(SolarYear/(1+SolarYear));      %Sidereal day
-Earth_Omega = (2*pi/SolarYear)/(3600*24);       %Earth Mean motion
-Sun_Omega = (360)/SolarYear;                    %Earth rate relative to vernal equinox
-OmegaE = 7.2921150e-5;                          %Angular speed of the Earth 
- 
-%Time relationships 
-vernalTime = datetime(2023,03,20,22,34,0,0);    %Day of the vernal equinox
-launchTime = datetime(2023,12,21,0,0,0,0);      %Launch day
-vernalTime = datenum(vernalTime);               %Day of the vernal equinox
-time = datenum(launchTime);                     %Launch day
+%% Constants
+mu = 3.986e14;                                  % Earth gravitational parameter
+J2 = 1.08263e-3;                                % Second zonal harmonic of the Earth
+J3 =  -2.53881e-6;                              % Third zonal harmonic of the Earth
+Re = 6378.14e3;                                 % Mean Earth radius
+SolarYear = 365.242199;                         % Solar year
+tau = (3600*24)*(SolarYear/(1+SolarYear));      % Sidereal day
+Earth_Omega = (2*pi/SolarYear)/(3600*24);       % Earth Mean motion
+Sun_Omega = (360)/SolarYear;                    % Earth rate relative to vernal equinox
+OmegaE = 7.2921150e-5;                          % Angular speed of the Earth 
+  
+%% Design input and orbit requirements
+% Time relationships 
+vernalTime = datetime(2023,03,20,22,34,0,0);    % Day of the vernal equinox
+vernalTime = datenum(vernalTime);               % Day of the vernal equinox
 
-%Sun requirements (this must change as a function of the launch date. See Sun's analemma)
-delta = deg2rad(2);                             %Solar declination
-eps = 0;                                        %Equation of time
+launchTime = datetime(2023,12,21,0,0,0,0);      % Launch day
+time = datenum(launchTime);                     % Launch day
+% Sun requirements (this must change as a function of the launch date. See Sun's analemma)
+delta = deg2rad(2);                             % Solar declination
+eps = 0;                                        % Equation of time
 
-%Orbit requirements 
-rep_days = 7;                                   %Days between identical groundtracks
-rev_day = 16.191;                               %Needed revolutions per day
-LTAN = 12;                                      %Mean Local Time of the Ascending Node
-phi = deg2rad(40.304665);                       %Latitude of interest for the LTAN
+% Orbit requirements 
+rep_days = 2;                                   % Repating groundtrack cycle in days
+rev_day = 16;                               % Needed revolutions per day
+LTAN = 6;                                      % Mean Local Time of the Ascending Node
+phi = deg2rad(40.304665);                       % Latitude of interest for the LTAN
 
-%% Altitude selection
-%Groundtrack requirements
-P = 86400/rev_day;                              %Nodal period
-a_d = (sqrt(mu)*P/(2*pi))^(2/3);                %Desired orbital altitude
+%% Argument of perigee design 
+% In general, this element cannot be freely selected and depends on the
+% launcher 
 
-%Orbit requirements
-a_d = a_e+600e3;
-T = 5.3387e+03; 
+% To freeze the eccentricity, select the AoP as
+omega_d = 270;                         
+
+elements(5) = omega_d;
+
+%% Semimajor axis design
+% Groundtrack requirements
+P = 86400/rev_day;                              % Nodal period
+a_d = (sqrt(mu)*P/(2*pi))^(2/3);                % Desired orbital SMA
+a_d = Re+522e3;                                 % Desired orbital SMA
+
+elements(1) = a_d; 
 
 %% Inclination selection
 %General inclination evaluation
-dOmega = Earth_Omega;                           %Orbital precession rate
-dh = 100;                                       %Altitude step
-a_max = 1000e3;                                 %Orbital altitude (circular orbit) over the geoid
-a = a_e:dh:a_e+a_max;                           %Orbital altitude
-e = 0;                                          %Orbital eccentricity
-omega = 0;                                      %Argument of perigee for frozen orbits
+dOmega = Earth_Omega;                           % Orbital precession rate
+dh = 100;                                       % Altitude step [m]
+a_max = 1000e3;                                 % Orbital altitude (circular orbit) over the geoid
+a = Re:dh:Re+a_max;                             % Orbital altitude
+e = 0;                                          % Orbital eccentricity
 
-%Inclination relationship with the orbital altitude
-n = sqrt(mu./a.^3);                             %Orbital mean motion
-p = a*(1-e^2);                                  %Semilatus rectum of the orbit
-i = acos((-2*dOmega*p.^2)./(3*J2*a_e^2.*n));    %Inclination 
+% Inclination-semimajor axis function for SSOs
+n = sqrt(mu./a.^3);                             % Orbital mean motion options
+p = a*(1-e^2);                                  % Semilatus rectum of the orbit
+i = acos((-2*dOmega*p.^2)./(3*J2*Re^2.*n));     % Inclination 
 
-%Desired inclination
-n_d = sqrt(mu/a_d^3);                           %Orbital mean motion
-p_d = a_d*(1-e^2);                              %Semilatus rectum of the orbit
-i_d = acos((-2*dOmega*p_d^2)/(3*J2*a_e^2*n_d)); %Desired inclination
+% Desired inclination
+n_d = sqrt(mu/a_d^3);                           % Orbital mean motion
+p_d = a_d*(1-e^2);                              % Semilatus rectum of the orbit
+i_d = acos((-2*dOmega*p_d^2)/(3*J2*Re^2*n_d));  % Desired inclination
 
-%Perturbed desired inclination
-tol = 1e-20;
-error = 1;
+% Iteration scheme setup 
+tol = 1e-20;                                    % Convergence tolerance
+error = 1;                                      % Initial error
 
 %Iterative scheme
 while (error >= tol)
-    %J2 perturbed mean motion
-    n_p  = n_d*(1+(3/2)*J2*(a_e/a_d)^2*sqrt(1-e^2)*(1-(3/2)*sin(i_d)^2));   %First order perturbation in the mean motion
-    i_p = acos((-2*dOmega*p_d^2)/(3*J2*a_e^2*n_p));
+    % Frozen AoP eccentricity (J3 perturbed motion)
+    e = (-1/2)*(J3/J2)*(Re/a_d)*sin(i_d);
+
+    % J2 perturbed mean motion
+    n_p  = n_d*(1+(3/2)*J2*(Re/a_d)^2*sqrt(1-e^2)*(1-(3/2)*sin(i_d)^2));   % First order perturbation in the mean motion due to the J2
+    i_p = acos((-2*dOmega*p_d^2)/(3*J2*Re^2*n_p));
+
+    % Convergence criteria
     error = abs(i_p-i_d);
     i_d = i_p;
 end
 
-%% Frozen orbit eccentricity
+elements(3) = i_d;
 
+%% Eccentricity design 
+% In general, this element cannot be freely selected and depends on the
+% launcher and the uncertainty in the injection point 
 
-%% RAAN selection
+% To freeze the AoP, select the eccentricity as
+e_d = (-1/2)*J3/J2*(Re/a_d)*sin(i_d);
+
+elements(2) = e_d;
+
+%% RAAN design (local illumination conditions) 
+% Local time analysis
 phi = (1/15)*asin(tan(phi)/tan(i_d));
 LTAN = LTAN-phi;
 RAAN_d = (360/24)*LTAN-180+(Sun_Omega)*(time-vernalTime);
+
+% Design RAAN
 RAAN_d = mod(RAAN_d, 360);
 
-%% Fundamental interval 
-dL = 360*(rep_days/rev_day);                    %Earth angle between adcent groundtracks
+elements(4) = RAAN_d;
 
-% Repeating ground track 
-Po = 2*pi/n_d*(1-(3/2)*J2*(a_e/a_d)^2*(3-4*sin(i_d)^2));
-Alpha = Po*(OmegaE-dOmega)*(180/pi);
+%% Groundtrack analysis
+dL = 360*(rep_days/rev_day);                                % Earth angle between adcent groundtracks 
+Po = (2*pi/n_d)*(1-(3/2)*J2*(Re/a_d)^2*(3-4*sin(i_d)^2));   % Pertubed nodal period
+Alpha = rad2deg(Po*(OmegaE-dOmega));                        % East-West drift
 
-%% Solar angle 
-s = [cos(delta)*cos(eps); cos(delta)*sin(eps); sin(delta)];     %Sun vector 
-h = [sin(i_d)*sin(RAAN_d); -sin(i_d)*cos(RAAN_d); cos(i_d)];    %Angular momentum vector 
-beta = asin(dot(h,s));                                          %Solar angle 
+%% Solar illumination conditions analysis
+% SSO beta angle
+s = [cos(delta)*cos(eps); cos(delta)*sin(eps); sin(delta)];     % Sun vector 
+h = [sin(i_d)*sin(RAAN_d); -sin(i_d)*cos(RAAN_d); cos(i_d)];    % Angular momentum vector 
+beta = asin(dot(h,s));                                          % Solar angle 
 
-%% Shadow time 
-eta = asin(a_e/a_d);                        
+% Shadow time 
+eta = asin(Re/a_d);                        
 nu = 2*acos(cos(eta)/cos(beta));            
-dTimeShadow = rad2deg(nu)/360*P;                                %Spent time in shadow
+dTimeShadow = rad2deg(nu)/360*P;                                % Time in shadow
 
 %% Results
 fprintf("LTAN: %.4f h \n", LTAN);
-fprintf("Orbital altitude: %.4f km \n", (a_d-a_e)/10^3);
-fprintf("Orbital inclination: %.8f deg \n", rad2deg(i_d));
-fprintf("RAAN: %.8f deg \n", RAAN_d);
+fprintf("Orbital SMA: %.8f km \n", (a_d/1e3));
+fprintf("Orbital Ecc: %.8f \n", e_d);
+fprintf("Orbital Inc: %.8f deg \n", rad2deg(i_d));
+fprintf("Orbital RAAN: %.8f deg \n", RAAN_d);
+fprintf("Orbital AoP: %.8f deg \n", omega_d);
+
 fprintf("Time in shadow: %.4f min \n", dTimeShadow/60);
 
 figure(1) 
 hold on
-plot((a-a_e)/1000, rad2deg(i), 'b');
-plot((a_d-a_e)/1000, rad2deg(i_d), 'or'); 
+plot((a-Re)/1e3, rad2deg(i), 'b');
+plot((a_d-Re)/1e3, rad2deg(i_d), 'or'); 
 hold off 
 grid on
 xlabel('Orbital altitude over the geoid (km)'); 

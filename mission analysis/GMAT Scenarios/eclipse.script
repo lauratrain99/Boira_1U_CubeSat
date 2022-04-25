@@ -1,0 +1,171 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2022-04-18 22:43:58
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft Boira;
+GMAT Boira.DateFormat = UTCGregorian;
+GMAT Boira.Epoch = '21 Dec 2023 00:00:00.000';
+GMAT Boira.CoordinateSystem = EarthMJ2000Eq;
+GMAT Boira.DisplayStateType = Keplerian;
+GMAT Boira.SMA = 6900.14;
+GMAT Boira.ECC = 0.001074569999999871;
+GMAT Boira.INC = 97.49042110000001;
+GMAT Boira.RAAN = 181.2282231999998;
+GMAT Boira.AOP = 0;
+GMAT Boira.TA = 360;
+GMAT Boira.DryMass = 1;
+GMAT Boira.Cd = 2.2;
+GMAT Boira.Cr = 1.8;
+GMAT Boira.DragArea = 0.01;
+GMAT Boira.SRPArea = 1;
+GMAT Boira.SPADDragScaleFactor = 1;
+GMAT Boira.SPADSRPScaleFactor = 1;
+GMAT Boira.NAIFId = -10001001;
+GMAT Boira.NAIFIdReferenceFrame = -9001001;
+GMAT Boira.OrbitColor = Red;
+GMAT Boira.TargetColor = Teal;
+GMAT Boira.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT Boira.CdSigma = 1e+70;
+GMAT Boira.CrSigma = 1e+70;
+GMAT Boira.Id = 'SatId';
+GMAT Boira.Attitude = CoordinateSystemFixed;
+GMAT Boira.SPADSRPInterpolationMethod = Bilinear;
+GMAT Boira.SPADSRPScaleFactorSigma = 1e+70;
+GMAT Boira.SPADDragInterpolationMethod = Bilinear;
+GMAT Boira.SPADDragScaleFactorSigma = 1e+70;
+GMAT Boira.ModelFile = 'aura.3ds';
+GMAT Boira.ModelOffsetX = 0;
+GMAT Boira.ModelOffsetY = 0;
+GMAT Boira.ModelOffsetZ = 0;
+GMAT Boira.ModelRotationX = 0;
+GMAT Boira.ModelRotationY = 0;
+GMAT Boira.ModelRotationZ = 0;
+GMAT Boira.ModelScale = 1;
+GMAT Boira.AttitudeDisplayStateType = 'Quaternion';
+GMAT Boira.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT Boira.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Boira.EulerAngleSequence = '321';
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Earth;
+GMAT DefaultProp_ForceModel.PrimaryBodies = {Earth};
+GMAT DefaultProp_ForceModel.SRP = Off;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Degree = 4;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Order = 4;
+GMAT DefaultProp_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT DefaultProp_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT DefaultProp_ForceModel.Drag.AtmosphereModel = MSISE90;
+GMAT DefaultProp_ForceModel.Drag.HistoricWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT DefaultProp_ForceModel.Drag.PredictedWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT DefaultProp_ForceModel.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+GMAT DefaultProp_ForceModel.Drag.SchattenFile = 'SchattenPredict.txt';
+GMAT DefaultProp_ForceModel.Drag.F107 = 150;
+GMAT DefaultProp_ForceModel.Drag.F107A = 150;
+GMAT DefaultProp_ForceModel.Drag.MagneticIndex = 3;
+GMAT DefaultProp_ForceModel.Drag.SchattenErrorModel = 'Nominal';
+GMAT DefaultProp_ForceModel.Drag.SchattenTimingModel = 'NominalCycle';
+GMAT DefaultProp_ForceModel.Drag.DragModel = 'Spherical';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.FM = DefaultProp_ForceModel;
+GMAT DefaultProp.Type = RungeKutta89;
+GMAT DefaultProp.InitialStepSize = 60;
+GMAT DefaultProp.Accuracy = 9.999999999999999e-12;
+GMAT DefaultProp.MinStep = 0.001;
+GMAT DefaultProp.MaxStep = 2700;
+GMAT DefaultProp.MaxStepAttempts = 50;
+GMAT DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- EventLocators
+%----------------------------------------
+
+Create EclipseLocator Eclipses;
+GMAT Eclipses.Spacecraft = Boira;
+GMAT Eclipses.Filename = 'C:\Users\sergi\OneDrive\Documentos\GitHub\Boira_1U_CubeSat\mission analysis\GMAT Scenarios\eclipse_report';
+GMAT Eclipses.OccultingBodies = {Earth};
+GMAT Eclipses.InputEpochFormat = 'TAIModJulian';
+GMAT Eclipses.InitialEpoch = '21545';
+GMAT Eclipses.StepSize = 10;
+GMAT Eclipses.FinalEpoch = '21545.138';
+GMAT Eclipses.UseLightTimeDelay = true;
+GMAT Eclipses.UseStellarAberration = true;
+GMAT Eclipses.WriteReport = true;
+GMAT Eclipses.RunMode = Automatic;
+GMAT Eclipses.UseEntireInterval = true;
+GMAT Eclipses.EclipseTypes = {'Umbra', 'Penumbra', 'Antumbra'};
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ 0.001764705882352941 0 ];
+GMAT DefaultOrbitView.Size = [ 0.5 0.4502487562189055 ];
+GMAT DefaultOrbitView.RelativeZOrder = 94;
+GMAT DefaultOrbitView.Maximized = false;
+GMAT DefaultOrbitView.Add = {Boira, Earth};
+GMAT DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultOrbitView.DrawObject = [ true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.MaxPlotPoints = 20000;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = Earth;
+GMAT DefaultOrbitView.ViewPointVector = [ 30000 0 0 ];
+GMAT DefaultOrbitView.ViewDirection = Earth;
+GMAT DefaultOrbitView.ViewScaleFactor = 1;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = Off;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = On;
+GMAT DefaultOrbitView.EnableConstellations = On;
+
+Create GroundTrackPlot DefaultGroundTrackPlot;
+GMAT DefaultGroundTrackPlot.SolverIterations = Current;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.002352941176470588 0.4539800995024876 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.5 0.4502487562189055 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 96;
+GMAT DefaultGroundTrackPlot.Maximized = false;
+GMAT DefaultGroundTrackPlot.Add = {Boira};
+GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
+GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+GMAT DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+GMAT DefaultGroundTrackPlot.ShowPlot = true;
+GMAT DefaultGroundTrackPlot.MaxPlotPoints = 20000;
+GMAT DefaultGroundTrackPlot.CentralBody = Earth;
+GMAT DefaultGroundTrackPlot.TextureMap = 'ModifiedBlueMarble.jpg';
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate 'Mission' DefaultProp(Boira) {Boira.Earth.RMAG = 6500};
