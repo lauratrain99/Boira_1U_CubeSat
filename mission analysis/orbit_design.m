@@ -142,10 +142,11 @@ amin = Re+250e3;                % Minimum nominal SMA
 r(3) = amin*(1-e_d);            % Minimum perigee altitude
 r(4) = amin*(1+e_d);            % Minimum apogee altitude
 
-dcone = 2*tan(FOV)*r;           % FOV cone diameter
-curvature = dcone/Re;           % Longitude range 
+dcone = tan(FOV)*r;             % FOV cone diameter
+sampling_time = dcone./sqrt(mu*(2./r-1./[a_d a_d amin amin]));
 
-sampling_time = curvature./sqrt(mu./[a_d a_d amin amin].^3);
+curvature = dcone/Re;           % Longitude range 
+sampling_time(2,:) = curvature./sqrt(mu./[a_d a_d amin amin].^3);
 
 %% Instantenous Access Area 
 % Constants
