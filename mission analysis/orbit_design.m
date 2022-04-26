@@ -22,6 +22,9 @@ tau = (3600*24)*(SolarYear/(1+SolarYear));      % Sidereal day
 Earth_Omega = (2*pi/SolarYear)/(3600*24);       % Earth Mean motion
 Sun_Omega = (360)/SolarYear;                    % Earth rate relative to vernal equinox
 OmegaE = 7.2921150e-5;                          % Angular speed of the Earth 
+
+%% Instrument characterization 
+FOV = deg2rad(5);                               % EO instrument FOV
   
 %% Design input and orbit requirements
 % Time relationships 
@@ -131,6 +134,42 @@ eta = asin(Re/a_d);
 nu = 2*acos(cos(eta)/cos(beta));            
 dTimeShadow = rad2deg(nu)/360*P;                                % Time in shadow
 
+%% Sampling time 
+r(1) = a_d*(1-e_d);             % Nominal perigee altitude
+r(2) = a_d*(1+e_d);             % Nominal apogee altitude
+
+amin = Re+250e3;                % Minimum nominal SMA 
+r(3) = amin*(1-e_d);            % Minimum perigee altitude
+r(4) = amin*(1+e_d);            % Minimum apogee altitude
+
+dcone = tan(FOV)*r;             % FOV cone diameter
+sampling_time = dcone./sqrt(mu*(2./r-1./[a_d a_d amin amin]));
+
+curvature = dcone/Re;           % Longitude range 
+sampling_time(2,:) = curvature./sqrt(mu./[a_d a_d amin amin].^3);
+
+%% Instantenous Access Area 
+% Constants
+K = 2.55604187e8;               % Conversion factor to km2
+
+% Spacecraft orbital altitude evolution 
+mission_lifetime = SolarYear*2;
+t = 0:mission_lifetime-1;
+rmax(1,:) = (1+e_d)*linspace(a_d, amin, mission_lifetime);
+rmax(2,:) = (1-e_d)*linspace(a_d, amin, mission_lifetime);
+
+% IAA
+lambda0 = acos(Re./rmax(1,:));
+IAA(1,:) = K*(1-cos(lambda0)); 
+
+lambda0 = acos(Re./rmax(2,:));
+IAA(2,:) = K*(1-cos(lambda0));
+
+maxIAA = [IAA(1,1) IAA(2,end)]; 
+
+% Relative IAA
+IAA = IAA/IAA(1,1);
+
 %% Results
 fprintf("LTAN: %.4f h \n", LTAN);
 fprintf("Orbital SMA: %.8f km \n", (a_d/1e3));
@@ -149,9 +188,19 @@ hold off
 grid on
 xlabel('Orbital altitude over the geoid (km)'); 
 ylabel('Orbital inclination (deg)'); 
-legend('Sun-synchronous orbit', 'Design point for GOCE');
-title('Orbit design point for GOCE');
+legend('Sun-synchronous orbit', 'Design point for Boira');
+title('Orbit design point for Boira');
 
+figure(2) 
+hold on
+plot(t, IAA(1,:), 'b');
+plot(t, IAA(2,:), 'r'); 
+hold off 
+grid on
+xlabel('Mission time [days]'); 
+ylabel('IAA  [km$^2$]'); 
+legend('Max IAA per orbit', 'Min IAA per orbit');
+title('IAA evolution in time');
 
 %% Auxiliary functions
 %Some cool graphics setup
