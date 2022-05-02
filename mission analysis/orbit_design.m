@@ -33,13 +33,12 @@ vernalTime = datenum(vernalTime);               % Day of the vernal equinox
 
 launchTime = datetime(2023,12,21,0,0,0,0);      % Launch day
 time = datenum(launchTime);                     % Launch day
+
 % Sun requirements (this must change as a function of the launch date. See Sun's analemma)
 delta = deg2rad(2);                             % Solar declination
 eps = 0;                                        % Equation of time
 
 % Orbit requirements 
-rep_days = 2;                                   % Repating groundtrack cycle in days
-rev_day = 16;                               % Needed revolutions per day
 LTAN = 6;                                      % Mean Local Time of the Ascending Node
 phi = deg2rad(40.304665);                       % Latitude of interest for the LTAN
 
@@ -54,8 +53,6 @@ elements(5) = omega_d;
 
 %% Semimajor axis design
 % Groundtrack requirements
-P = 86400/rev_day;                              % Nodal period
-a_d = (sqrt(mu)*P/(2*pi))^(2/3);                % Desired orbital SMA
 a_d = Re+522e3;                                 % Desired orbital SMA
 
 elements(1) = a_d; 
@@ -119,9 +116,15 @@ RAAN_d = mod(RAAN_d, 360);
 elements(4) = RAAN_d;
 
 %% Groundtrack analysis
-dL = 360*(rep_days/rev_day);                                % Earth angle between adcent groundtracks 
-Po = (2*pi/n_d)*(1-(3/2)*J2*(Re/a_d)^2*(3-4*sin(i_d)^2));   % Pertubed nodal period
-Alpha = rad2deg(Po*(OmegaE-dOmega));                        % East-West drift
+% Pertubed nodal period
+Po = 2*pi*sqrt(a_d^3/mu)*(1-(3/2)*J2*(Re/a_d)^2*(3-4*sin(i_d)^2)); 
+
+dL = Po*(OmegaE-dOmega);                    % East-West drift or fundamental interval
+rev_days = 86400/Po;                        % Revolutions per day 
+rep_days = 2*pi/dL;                         % Number of revolutions in the cycle       
+cycle_days = floor(rep_days/rev_days);      % Length of the cycle in days 
+
+ratio = Po/86400; 
 
 %% Solar illumination conditions analysis
 % SSO beta angle
@@ -132,7 +135,7 @@ beta = asin(dot(h,s));                                          % Solar angle
 % Shadow time 
 eta = asin(Re/a_d);                        
 nu = 2*acos(cos(eta)/cos(beta));            
-dTimeShadow = rad2deg(nu)/360*P;                                % Time in shadow
+dTimeShadow = rad2deg(nu)/360*Po;                               % Time in shadow
 
 %% Sampling time 
 r(1) = a_d*(1-e_d);             % Nominal perigee altitude
@@ -179,6 +182,7 @@ fprintf("Orbital RAAN: %.8f deg \n", RAAN_d);
 fprintf("Orbital AoP: %.8f deg \n", omega_d);
 
 fprintf("Time in shadow: %.4f min \n", dTimeShadow/60);
+fprintf("RGT cycle: %d days \n", cycle_days);
 
 figure(1) 
 hold on

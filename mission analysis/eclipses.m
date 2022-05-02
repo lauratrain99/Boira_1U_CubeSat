@@ -12,7 +12,7 @@ set_graphics();
 
 %% File processing
 % File data
-filename = 'Data/eclipse_report.txt'; 
+filename = 'Data/eclipse_report_dawn.txt'; 
 fileID = fopen(filename, 'r');
 
 % Raw data

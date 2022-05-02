@@ -1,54 +1,56 @@
 %General Mission Analysis Tool(GMAT) Script
-%Created: 2022-04-18 22:43:58
+%Created: 2022-04-13 01:31:29
 
 
 %----------------------------------------
 %---------- Spacecraft
 %----------------------------------------
 
-Create Spacecraft Boira;
-GMAT Boira.DateFormat = UTCGregorian;
-GMAT Boira.Epoch = '21 Dec 2023 00:00:00.000';
-GMAT Boira.CoordinateSystem = EarthMJ2000Eq;
-GMAT Boira.DisplayStateType = Keplerian;
-GMAT Boira.SMA = 6900.14;
-GMAT Boira.ECC = 0.001074569999999871;
-GMAT Boira.INC = 97.49042110000001;
-GMAT Boira.RAAN = 181.2282231999998;
-GMAT Boira.AOP = 0;
-GMAT Boira.TA = 360;
-GMAT Boira.DryMass = 1;
-GMAT Boira.Cd = 2.2;
-GMAT Boira.Cr = 1.8;
-GMAT Boira.DragArea = 0.01;
-GMAT Boira.SRPArea = 1;
-GMAT Boira.SPADDragScaleFactor = 1;
-GMAT Boira.SPADSRPScaleFactor = 1;
-GMAT Boira.NAIFId = -10001001;
-GMAT Boira.NAIFIdReferenceFrame = -9001001;
-GMAT Boira.OrbitColor = Red;
-GMAT Boira.TargetColor = Teal;
-GMAT Boira.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
-GMAT Boira.CdSigma = 1e+70;
-GMAT Boira.CrSigma = 1e+70;
-GMAT Boira.Id = 'SatId';
-GMAT Boira.Attitude = CoordinateSystemFixed;
-GMAT Boira.SPADSRPInterpolationMethod = Bilinear;
-GMAT Boira.SPADSRPScaleFactorSigma = 1e+70;
-GMAT Boira.SPADDragInterpolationMethod = Bilinear;
-GMAT Boira.SPADDragScaleFactorSigma = 1e+70;
-GMAT Boira.ModelFile = 'aura.3ds';
-GMAT Boira.ModelOffsetX = 0;
-GMAT Boira.ModelOffsetY = 0;
-GMAT Boira.ModelOffsetZ = 0;
-GMAT Boira.ModelRotationX = 0;
-GMAT Boira.ModelRotationY = 0;
-GMAT Boira.ModelRotationZ = 0;
-GMAT Boira.ModelScale = 1;
-GMAT Boira.AttitudeDisplayStateType = 'Quaternion';
-GMAT Boira.AttitudeRateDisplayStateType = 'AngularVelocity';
-GMAT Boira.AttitudeCoordinateSystem = EarthMJ2000Eq;
-GMAT Boira.EulerAngleSequence = '321';
+Create Spacecraft BOIRA;
+GMAT BOIRA.DateFormat = UTCGregorian;
+GMAT BOIRA.Epoch = '21 Dec 2023 00:00:00.000';
+GMAT BOIRA.CoordinateSystem = EarthMJ2000Eq;
+GMAT BOIRA.DisplayStateType = Keplerian;
+GMAT BOIRA.SMA = 6900.14;
+GMAT BOIRA.ECC = 0.001074569999999872;
+GMAT BOIRA.INC = 97.49042110000001;
+GMAT BOIRA.RAAN = 271.22363821;
+GMAT BOIRA.AOP = 269.9999999999999;
+GMAT BOIRA.TA = 0;
+GMAT BOIRA.DryMass = 1;
+GMAT BOIRA.Cd = 2.2;
+GMAT BOIRA.Cr = 1.8;
+GMAT BOIRA.DragArea = 0.01;
+GMAT BOIRA.SRPArea = 0.01;
+GMAT BOIRA.SPADDragScaleFactor = 1;
+GMAT BOIRA.SPADSRPScaleFactor = 1;
+GMAT BOIRA.NAIFId = -10001001;
+GMAT BOIRA.NAIFIdReferenceFrame = -9001001;
+GMAT BOIRA.OrbitColor = Red;
+GMAT BOIRA.TargetColor = Teal;
+GMAT BOIRA.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT BOIRA.CdSigma = 1e+70;
+GMAT BOIRA.CrSigma = 1e+70;
+GMAT BOIRA.Id = 'SatId';
+GMAT BOIRA.Attitude = CoordinateSystemFixed;
+GMAT BOIRA.SPADSRPInterpolationMethod = Bilinear;
+GMAT BOIRA.SPADSRPScaleFactorSigma = 1e+70;
+GMAT BOIRA.SPADDragInterpolationMethod = Bilinear;
+GMAT BOIRA.SPADDragScaleFactorSigma = 1e+70;
+GMAT BOIRA.ModelFile = 'aura.3ds';
+GMAT BOIRA.ModelOffsetX = 0;
+GMAT BOIRA.ModelOffsetY = 0;
+GMAT BOIRA.ModelOffsetZ = 0;
+GMAT BOIRA.ModelRotationX = 0;
+GMAT BOIRA.ModelRotationY = 0;
+GMAT BOIRA.ModelRotationZ = 0;
+GMAT BOIRA.ModelScale = 1;
+GMAT BOIRA.AttitudeDisplayStateType = 'Quaternion';
+GMAT BOIRA.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT BOIRA.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT BOIRA.EulerAngleSequence = '321';
+
+
 
 
 %----------------------------------------
@@ -93,25 +95,6 @@ GMAT DefaultProp.MaxStepAttempts = 50;
 GMAT DefaultProp.StopIfAccuracyIsViolated = true;
 
 %----------------------------------------
-%---------- EventLocators
-%----------------------------------------
-
-Create EclipseLocator Eclipses;
-GMAT Eclipses.Spacecraft = Boira;
-GMAT Eclipses.Filename = 'C:\Users\sergi\OneDrive\Documentos\GitHub\Boira_1U_CubeSat\mission analysis\GMAT Scenarios\eclipse_report';
-GMAT Eclipses.OccultingBodies = {Earth};
-GMAT Eclipses.InputEpochFormat = 'TAIModJulian';
-GMAT Eclipses.InitialEpoch = '21545';
-GMAT Eclipses.StepSize = 10;
-GMAT Eclipses.FinalEpoch = '21545.138';
-GMAT Eclipses.UseLightTimeDelay = true;
-GMAT Eclipses.UseStellarAberration = true;
-GMAT Eclipses.WriteReport = true;
-GMAT Eclipses.RunMode = Automatic;
-GMAT Eclipses.UseEntireInterval = true;
-GMAT Eclipses.EclipseTypes = {'Umbra', 'Penumbra', 'Antumbra'};
-
-%----------------------------------------
 %---------- Subscribers
 %----------------------------------------
 
@@ -119,9 +102,9 @@ Create OrbitView DefaultOrbitView;
 GMAT DefaultOrbitView.SolverIterations = Current;
 GMAT DefaultOrbitView.UpperLeft = [ 0.001764705882352941 0 ];
 GMAT DefaultOrbitView.Size = [ 0.5 0.4502487562189055 ];
-GMAT DefaultOrbitView.RelativeZOrder = 94;
+GMAT DefaultOrbitView.RelativeZOrder = 7;
 GMAT DefaultOrbitView.Maximized = false;
-GMAT DefaultOrbitView.Add = {Boira, Earth};
+GMAT DefaultOrbitView.Add = {BOIRA, Earth};
 GMAT DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
 GMAT DefaultOrbitView.DrawObject = [ true true ];
 GMAT DefaultOrbitView.DataCollectFrequency = 1;
@@ -149,11 +132,11 @@ GMAT DefaultOrbitView.EnableConstellations = On;
 
 Create GroundTrackPlot DefaultGroundTrackPlot;
 GMAT DefaultGroundTrackPlot.SolverIterations = Current;
-GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.002352941176470588 0.4539800995024876 ];
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.002352941176470588 0 ];
 GMAT DefaultGroundTrackPlot.Size = [ 0.5 0.4502487562189055 ];
-GMAT DefaultGroundTrackPlot.RelativeZOrder = 96;
-GMAT DefaultGroundTrackPlot.Maximized = false;
-GMAT DefaultGroundTrackPlot.Add = {Boira};
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 64;
+GMAT DefaultGroundTrackPlot.Maximized = true;
+GMAT DefaultGroundTrackPlot.Add = {BOIRA};
 GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
 GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
 GMAT DefaultGroundTrackPlot.NumPointsToRedraw = 0;
@@ -168,4 +151,8 @@ GMAT DefaultGroundTrackPlot.TextureMap = 'ModifiedBlueMarble.jpg';
 %----------------------------------------
 
 BeginMissionSequence;
-Propagate 'Mission' DefaultProp(Boira) {Boira.Earth.RMAG = 6500};
+Propagate 'Start' DefaultProp(BOIRA) {BOIRA.ElapsedSecs = 5400};
+Toggle 'Deactivate GT' DefaultGroundTrackPlot Off;
+Propagate 'Mission' DefaultProp(BOIRA) {BOIRA.ElapsedDays = 7};
+Toggle 'Activate GT' DefaultGroundTrackPlot On;
+Propagate 'Finish' DefaultProp(BOIRA) {BOIRA.ElapsedSecs = 5200};
