@@ -1,4 +1,4 @@
-function [r, v] = coe2rv(mu, a, e, Omega, inc, omega, theta)
+function [r, v, k3, DCM_30] = coe2rv(mu, a, e, Omega, inc, omega, theta)
 % coe2rv converts from Classical Orbit Elements to the components of the state
 % vector x = [r,v] (position and velocity)
 % vector x = [r,v] (position and velocity) in ECI coordinates
@@ -26,16 +26,29 @@ function [r, v] = coe2rv(mu, a, e, Omega, inc, omega, theta)
     j1 = -sin(Omega)*i0 + cos(Omega)*j0;
     k1 = k0;
     
+    DCM_10 = [cos(Omega), sin(Omega), 0;
+             -sin(Omega), cos(Omega), 0;
+                       0,          0, 1];
+    
     % B2
     i2 = i1;
     j2 = cos(inc)*j1 + sin(inc)*k1;
     k2 = -sin(inc)*j1 + cos(inc)*k1;
    
+    DCM_21 = [1, 0, 0;
+           0, cos(inc), sin(inc);
+           0, -sin(inc),   cos(inc)];
+                   
     % B3
     i3 = cos(omega)*i2 + sin(omega)*j2;
     j3 = -sin(omega)*i2 + cos(omega)*j2;
     k3 = k2;
     
+    DCM_32 = [cos(omega), sin(omega), 0;
+             -sin(omega), cos(omega), 0;
+                       0,          0, 1];
+    
+    DCM_30 = DCM_32*DCM_21*DCM_10;
     
     % Cylindrical vector basis in the plane of motion
     er = cos(theta)*i3 + sin(theta)*j3;

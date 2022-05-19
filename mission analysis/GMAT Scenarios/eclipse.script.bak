@@ -1,170 +1,229 @@
-%General Mission Analysis Tool(GMAT) Script
-%Created: 2022-04-18 22:43:58
+Spacecraft: Boira
+
+Start Time (UTC)            Stop Time (UTC)               Duration (s)    Occ Body        Type        Event Number  Total Duration (s)
+21 Dec 2023 00:13:46.133    21 Dec 2023 00:14:09.564      23.431389453    Earth           Penumbra    1             1355.4086271
+21 Dec 2023 00:14:09.564    21 Dec 2023 00:35:58.187      1308.6225225    Earth           Umbra       1             1355.4086271
+21 Dec 2023 00:35:58.187    21 Dec 2023 00:36:21.542      23.354715155    Earth           Penumbra    1             1355.4086271
+21 Dec 2023 01:48:46.010    21 Dec 2023 01:49:09.443      23.432790069    Earth           Penumbra    2             1355.4117332
+21 Dec 2023 01:49:09.443    21 Dec 2023 02:10:58.066      1308.6230921    Earth           Umbra       2             1355.4117332
+21 Dec 2023 02:10:58.066    21 Dec 2023 02:11:21.422      23.355851113    Earth           Penumbra    2             1355.4117332
+21 Dec 2023 03:23:45.729    21 Dec 2023 03:24:09.156      23.427596537    Earth           Penumbra    3             1355.6073838
+21 Dec 2023 03:24:09.156    21 Dec 2023 03:45:57.986      1308.8292583    Earth           Umbra       3             1355.6073838
+21 Dec 2023 03:45:57.986    21 Dec 2023 03:46:21.336      23.350529023    Earth           Penumbra    3             1355.6073838
+21 Dec 2023 04:58:45.365    21 Dec 2023 04:59:08.786      23.421156092    Earth           Penumbra    4             1355.7990061
+21 Dec 2023 04:59:08.786    21 Dec 2023 05:20:57.819      1309.0336288    Earth           Umbra       4             1355.7990061
+21 Dec 2023 05:20:57.819    21 Dec 2023 05:21:21.164      23.344221222    Earth           Penumbra    4             1355.7990061
+21 Dec 2023 06:33:45.035    21 Dec 2023 06:34:08.454      23.418839858    Earth           Penumbra    5             1355.8441266
+21 Dec 2023 06:34:08.454    21 Dec 2023 06:55:57.536      1309.0829854    Earth           Umbra       5             1355.8441266
+21 Dec 2023 06:55:57.536    21 Dec 2023 06:56:20.879      23.342301347    Earth           Penumbra    5             1355.8441266
+21 Dec 2023 08:08:44.772    21 Dec 2023 08:09:08.193      23.421229643    Earth           Penumbra    6             1355.7623355
+21 Dec 2023 08:09:08.193    21 Dec 2023 08:30:57.189      1308.9959165    Earth           Umbra       6             1355.7623355
+21 Dec 2023 08:30:57.189    21 Dec 2023 08:31:20.534      23.345189332    Earth           Penumbra    6             1355.7623355
+21 Dec 2023 09:43:44.567    21 Dec 2023 09:44:07.993      23.426071450    Earth           Penumbra    7             1355.6185539
+21 Dec 2023 09:44:07.993    21 Dec 2023 10:05:56.835      1308.8421238    Earth           Umbra       7             1355.6185539
+21 Dec 2023 10:05:56.835    21 Dec 2023 10:06:20.186      23.350358661    Earth           Penumbra    7             1355.6185539
+21 Dec 2023 11:18:44.411    21 Dec 2023 11:19:07.842      23.430371995    Earth           Penumbra    8             1355.4747959
+21 Dec 2023 11:19:07.842    21 Dec 2023 11:40:56.531      1308.6897650    Earth           Umbra       8             1355.4747959
+21 Dec 2023 11:40:56.531    21 Dec 2023 11:41:19.886      23.354658892    Earth           Penumbra    8             1355.4747959
+21 Dec 2023 12:53:44.242    21 Dec 2023 12:54:07.674      23.431485007    Earth           Penumbra    9             1355.4135032
+21 Dec 2023 12:54:07.674    21 Dec 2023 13:15:56.300      1308.6262821    Earth           Umbra       9             1355.4135032
+21 Dec 2023 13:15:56.300    21 Dec 2023 13:16:19.656      23.355736071    Earth           Penumbra    9             1355.4135032
+21 Dec 2023 14:28:43.978    21 Dec 2023 14:29:07.408      23.429885739    Earth           Penumbra    10            1355.4573444
+21 Dec 2023 14:29:07.408    21 Dec 2023 14:50:56.081      1308.6729252    Earth           Umbra       10            1355.4573444
+21 Dec 2023 14:50:56.081    21 Dec 2023 14:51:19.435      23.354533478    Earth           Penumbra    10            1355.4573444
+21 Dec 2023 16:03:43.630    21 Dec 2023 16:04:07.059      23.429036129    Earth           Penumbra    11            1355.5209920
+21 Dec 2023 16:04:07.059    21 Dec 2023 16:25:55.797      1308.7374459    Earth           Umbra       11            1355.5209920
+21 Dec 2023 16:25:55.797    21 Dec 2023 16:26:19.151      23.354509904    Earth           Penumbra    11            1355.5209920
+21 Dec 2023 17:38:43.286    21 Dec 2023 17:39:06.717      23.430281784    Earth           Penumbra    12            1355.5370673
+21 Dec 2023 17:39:06.717    21 Dec 2023 18:00:55.467      1308.7503319    Earth           Umbra       12            1355.5370673
+21 Dec 2023 18:00:55.467    21 Dec 2023 18:01:18.824      23.356453667    Earth           Penumbra    12            1355.5370673
+21 Dec 2023 19:13:42.992    21 Dec 2023 19:14:06.424      23.431610106    Earth           Penumbra    13            1355.5219192
+21 Dec 2023 19:14:06.424    21 Dec 2023 19:35:55.156      1308.7323907    Earth           Umbra       13            1355.5219192
+21 Dec 2023 19:35:55.156    21 Dec 2023 19:36:18.514      23.357918405    Earth           Penumbra    13            1355.5219192
+21 Dec 2023 20:48:42.750    21 Dec 2023 20:49:06.183      23.433076101    Earth           Penumbra    14            1355.4567532
+21 Dec 2023 20:49:06.183    21 Dec 2023 21:10:54.848      1308.6645778    Earth           Umbra       14            1355.4567532
+21 Dec 2023 21:10:54.848    21 Dec 2023 21:11:18.207      23.359099310    Earth           Penumbra    14            1355.4567532
+21 Dec 2023 22:23:42.585    21 Dec 2023 22:24:06.023      23.437725543    Earth           Penumbra    15            1355.2785103
+21 Dec 2023 22:24:06.023    21 Dec 2023 22:45:54.500      1308.4773818    Earth           Umbra       15            1355.2785103
+21 Dec 2023 22:45:54.500    21 Dec 2023 22:46:17.864      23.363402998    Earth           Penumbra    15            1355.2785103
+21 Dec 2023 23:58:42.483    21 Dec 2023 23:59:05.928      23.444732395    Earth           Penumbra    16            1355.0599086
+21 Dec 2023 23:59:05.928    22 Dec 2023 00:20:54.173      1308.2450713    Earth           Umbra       16            1355.0599086
+22 Dec 2023 00:20:54.173    22 Dec 2023 00:21:17.543      23.370104958    Earth           Penumbra    16            1355.0599086
+22 Dec 2023 01:33:42.324    22 Dec 2023 01:34:05.772      23.447926529    Earth           Penumbra    17            1354.9994150
+22 Dec 2023 01:34:05.772    22 Dec 2023 01:55:53.950      1308.1784757    Earth           Umbra       17            1354.9994150
+22 Dec 2023 01:55:53.950    22 Dec 2023 01:56:17.323      23.373012745    Earth           Penumbra    17            1354.9994150
+22 Dec 2023 03:08:42.008    22 Dec 2023 03:09:05.452      23.444244883    Earth           Penumbra    18            1355.1483106
+22 Dec 2023 03:09:05.452    22 Dec 2023 03:30:53.787      1308.3349097    Earth           Umbra       18            1355.1483106
+22 Dec 2023 03:30:53.787    22 Dec 2023 03:31:17.156      23.369156022    Earth           Penumbra    18            1355.1483106
+22 Dec 2023 04:43:41.590    22 Dec 2023 04:44:05.029      23.438237258    Earth           Penumbra    19            1355.3277104
+22 Dec 2023 04:44:05.029    22 Dec 2023 05:05:53.555      1308.5262452    Earth           Umbra       19            1355.3277104
+22 Dec 2023 05:05:53.555    22 Dec 2023 05:06:16.918      23.363227921    Earth           Penumbra    19            1355.3277104
+22 Dec 2023 06:18:41.193    22 Dec 2023 06:19:04.628      23.435800639    Earth           Penumbra    20            1355.3711707
+22 Dec 2023 06:19:04.628    22 Dec 2023 06:40:53.203      1308.5742245    Earth           Umbra       20            1355.3711707
+22 Dec 2023 06:40:53.203    22 Dec 2023 06:41:16.564      23.361145542    Earth           Penumbra    20            1355.3711707
+22 Dec 2023 07:53:40.861    22 Dec 2023 07:54:04.300      23.438255489    Earth           Penumbra    21            1355.2779757
+22 Dec 2023 07:54:04.300    22 Dec 2023 08:15:52.775      1308.4756225    Earth           Umbra       21            1355.2779757
+22 Dec 2023 08:15:52.775    22 Dec 2023 08:16:16.139      23.364097648    Earth           Penumbra    21            1355.2779757
+22 Dec 2023 09:28:40.590    22 Dec 2023 09:29:04.033      23.443598324    Earth           Penumbra    22            1355.1133103
+22 Dec 2023 09:29:04.033    22 Dec 2023 09:50:52.333      1308.2999093    Earth           Umbra       22            1355.1133103
+22 Dec 2023 09:50:52.333    22 Dec 2023 09:51:15.703      23.369802581    Earth           Penumbra    22            1355.1133103
+22 Dec 2023 11:03:40.370    22 Dec 2023 11:04:03.819      23.448904068    Earth           Penumbra    23            1354.9371237
+22 Dec 2023 11:04:03.819    22 Dec 2023 11:25:51.932      1308.1130717    Earth           Umbra       23            1354.9371237
+22 Dec 2023 11:25:51.932    22 Dec 2023 11:26:15.307      23.375147930    Earth           Penumbra    23            1354.9371237
+22 Dec 2023 12:38:40.152    22 Dec 2023 12:39:03.603      23.451306112    Earth           Penumbra    24            1354.8312628
+22 Dec 2023 12:39:03.603    22 Dec 2023 13:00:51.605      1308.0024771    Earth           Umbra       24            1354.8312628
+22 Dec 2023 13:00:51.605    22 Dec 2023 13:01:14.983      23.377479566    Earth           Penumbra    24            1354.8312628
+22 Dec 2023 14:13:39.847    22 Dec 2023 14:14:03.298      23.450624035    Earth           Penumbra    25            1354.8355272
+22 Dec 2023 14:14:03.298    22 Dec 2023 14:35:51.306      1308.0078039    Earth           Umbra       25            1354.8355272
+22 Dec 2023 14:35:51.306    22 Dec 2023 14:36:14.683      23.377099237    Earth           Penumbra    25            1354.8355272
+22 Dec 2023 15:48:39.449    22 Dec 2023 15:49:02.899      23.450128664    Earth           Penumbra    26            1354.8764436
+22 Dec 2023 15:49:02.899    22 Dec 2023 16:10:50.948      1308.0489297    Earth           Umbra       26            1354.8764436
+22 Dec 2023 16:10:50.948    22 Dec 2023 16:11:14.325      23.377385270    Earth           Penumbra    26            1354.8764436
+22 Dec 2023 17:23:39.041    22 Dec 2023 17:24:02.493      23.451828200    Earth           Penumbra    27            1354.8735560
+22 Dec 2023 17:24:02.493    22 Dec 2023 17:45:50.535      1308.0418870    Earth           Umbra       27            1354.8735560
+22 Dec 2023 17:45:50.535    22 Dec 2023 17:46:13.915      23.379840748    Earth           Penumbra    27            1354.8735560
+22 Dec 2023 18:58:38.681    22 Dec 2023 18:59:02.135      23.453959613    Earth           Penumbra    28            1354.8351842
+22 Dec 2023 18:59:02.135    22 Dec 2023 19:20:50.134      1307.9990252    Earth           Umbra       28            1354.8351842
+22 Dec 2023 19:20:50.134    22 Dec 2023 19:21:13.516      23.382199416    Earth           Penumbra    28            1354.8351842
+22 Dec 2023 20:33:38.372    22 Dec 2023 20:34:01.828      23.455925693    Earth           Penumbra    29            1354.7557471
+22 Dec 2023 20:34:01.828    22 Dec 2023 20:55:49.743      1307.9159048    Earth           Umbra       29            1354.7557471
+22 Dec 2023 20:55:49.743    22 Dec 2023 20:56:13.127      23.383916554    Earth           Penumbra    29            1354.7557471
+22 Dec 2023 22:08:38.135    22 Dec 2023 22:09:01.596      23.460657173    Earth           Penumbra    30            1354.5687743
+22 Dec 2023 22:09:01.596    22 Dec 2023 22:30:49.316      1307.7198239    Earth           Umbra       30            1354.5687743
+22 Dec 2023 22:30:49.316    22 Dec 2023 22:31:12.704      23.388293164    Earth           Penumbra    30            1354.5687743
+22 Dec 2023 23:43:37.971    22 Dec 2023 23:44:01.439      23.468347359    Earth           Penumbra    31            1354.3167504
+22 Dec 2023 23:44:01.439    23 Dec 2023 00:05:48.892      1307.4527293    Earth           Umbra       31            1354.3167504
+23 Dec 2023 00:05:48.892    23 Dec 2023 00:06:12.287      23.395673744    Earth           Penumbra    31            1354.3167504
+23 Dec 2023 01:18:37.772    23 Dec 2023 01:19:01.245      23.473250773    Earth           Penumbra    32            1354.1939743
+23 Dec 2023 01:19:01.245    23 Dec 2023 01:40:48.565      1307.3204478    Earth           Umbra       32            1354.1939743
+23 Dec 2023 01:40:48.565    23 Dec 2023 01:41:11.966      23.400275724    Earth           Penumbra    32            1354.1939743
+23 Dec 2023 02:53:37.423    23 Dec 2023 02:54:00.895      23.471210827    Earth           Penumbra    33            1354.2909990
+23 Dec 2023 02:54:00.895    23 Dec 2023 03:15:48.316      1307.4217640    Earth           Umbra       33            1354.2909990
+23 Dec 2023 03:15:48.316    23 Dec 2023 03:16:11.714      23.398024240    Earth           Penumbra    33            1354.2909990
+23 Dec 2023 04:28:36.956    23 Dec 2023 04:29:00.421      23.465795384    Earth           Penumbra    34            1354.4538118
+23 Dec 2023 04:29:00.421    23 Dec 2023 04:50:48.017      1307.5953850    Earth           Umbra       34            1354.4538118
+23 Dec 2023 04:50:48.017    23 Dec 2023 04:51:11.409      23.392631428    Earth           Penumbra    34            1354.4538118
+23 Dec 2023 06:03:36.491    23 Dec 2023 06:03:59.955      23.463258496    Earth           Penumbra    35            1354.4960239
+23 Dec 2023 06:03:59.955    23 Dec 2023 06:25:47.597      1307.6423622    Earth           Umbra       35            1354.4960239
+23 Dec 2023 06:25:47.597    23 Dec 2023 06:26:10.987      23.390403204    Earth           Penumbra    35            1354.4960239
+23 Dec 2023 07:38:36.092    23 Dec 2023 07:38:59.558      23.465727177    Earth           Penumbra    36            1354.3932003
+23 Dec 2023 07:38:59.558    23 Dec 2023 08:00:47.092      1307.5341147    Earth           Umbra       36            1354.3932003
+23 Dec 2023 08:00:47.092    23 Dec 2023 08:01:10.485      23.393358453    Earth           Penumbra    36            1354.3932003
+23 Dec 2023 09:13:35.753    23 Dec 2023 09:13:59.225      23.471498117    Earth           Penumbra    37            1354.2089033
+23 Dec 2023 09:13:59.225    23 Dec 2023 09:35:46.563      1307.3378747    Earth           Umbra       37            1354.2089033
+23 Dec 2023 09:35:46.563    23 Dec 2023 09:36:09.962      23.399530468    Earth           Penumbra    37            1354.2089033
+23 Dec 2023 10:48:35.469    23 Dec 2023 10:48:58.947      23.477738653    Earth           Penumbra    38            1354.0023433
+23 Dec 2023 10:48:58.947    23 Dec 2023 11:10:46.065      1307.1187494    Earth           Umbra       38            1354.0023433
+23 Dec 2023 11:10:46.065    23 Dec 2023 11:11:09.471      23.405855242    Earth           Penumbra    38            1354.0023433
+23 Dec 2023 12:23:35.199    23 Dec 2023 12:23:58.680      23.481436016    Earth           Penumbra    39            1353.8529278
+23 Dec 2023 12:23:58.680    23 Dec 2023 12:45:45.642      1306.9620338    Earth           Umbra       39            1353.8529278
+23 Dec 2023 12:45:45.642    23 Dec 2023 12:46:09.052      23.409457994    Earth           Penumbra    39            1353.8529278
+23 Dec 2023 13:58:34.854    23 Dec 2023 13:58:58.335      23.481772654    Earth           Penumbra    40            1353.8153255
+23 Dec 2023 13:58:58.335    23 Dec 2023 14:20:45.259      1306.9235479    Earth           Umbra       40            1353.8153255
+23 Dec 2023 14:20:45.259    23 Dec 2023 14:21:08.669      23.410004913    Earth           Penumbra    40            1353.8153255
+23 Dec 2023 15:33:34.408    23 Dec 2023 15:33:57.890      23.481689987    Earth           Penumbra    41            1353.8312000
+23 Dec 2023 15:33:57.890    23 Dec 2023 15:55:44.828      1306.9388645    Earth           Umbra       41            1353.8312000
+23 Dec 2023 15:55:44.828    23 Dec 2023 15:56:08.239      23.410645500    Earth           Penumbra    41            1353.8312000
+23 Dec 2023 17:08:33.938    23 Dec 2023 17:08:57.422      23.483781167    Earth           Penumbra    42            1353.8099101
+23 Dec 2023 17:08:57.422    23 Dec 2023 17:30:44.334      1306.9125929    Earth           Umbra       42            1353.8099101
+23 Dec 2023 17:30:44.334    23 Dec 2023 17:31:07.748      23.413535999    Earth           Penumbra    42            1353.8099101
+23 Dec 2023 18:43:33.511    23 Dec 2023 18:43:56.998      23.486696184    Earth           Penumbra    43            1353.7483326
+23 Dec 2023 18:43:56.998    23 Dec 2023 19:05:43.843      1306.8448689    Earth           Umbra       43            1353.7483326
+23 Dec 2023 19:05:43.843    23 Dec 2023 19:06:07.260      23.416767537    Earth           Penumbra    43            1353.7483326
+23 Dec 2023 20:18:33.136    23 Dec 2023 20:18:56.625      23.489251931    Earth           Penumbra    44            1353.6524108
+23 Dec 2023 20:18:56.625    23 Dec 2023 20:40:43.369      1306.7440302    Earth           Umbra       44            1353.6524108
+23 Dec 2023 20:40:43.369    23 Dec 2023 20:41:06.788      23.419128719    Earth           Penumbra    44            1353.6524108
+23 Dec 2023 21:53:32.828    23 Dec 2023 21:53:56.322      23.494084936    Earth           Penumbra    45            1353.4574826
+23 Dec 2023 21:53:56.322    23 Dec 2023 22:15:42.862      1306.5397933    Earth           Umbra       45            1353.4574826
+23 Dec 2023 22:15:42.862    23 Dec 2023 22:16:06.286      23.423604341    Earth           Penumbra    45            1353.4574826
+23 Dec 2023 23:28:32.599    23 Dec 2023 23:28:56.101      23.502308840    Earth           Penumbra    46            1353.1773194
+23 Dec 2023 23:28:56.101    23 Dec 2023 23:50:42.344      1306.2435045    Earth           Umbra       46            1353.1773194
+23 Dec 2023 23:50:42.344    23 Dec 2023 23:51:05.776      23.431506066    Earth           Penumbra    46            1353.1773194
+24 Dec 2023 01:03:32.357    24 Dec 2023 01:03:55.866      23.508814350    Earth           Penumbra    47            1352.9946091
+24 Dec 2023 01:03:55.866    24 Dec 2023 01:25:41.914      1306.0480916    Earth           Umbra       47            1352.9946091
+24 Dec 2023 01:25:41.914    24 Dec 2023 01:26:05.352      23.437703226    Earth           Penumbra    47            1352.9946091
+24 Dec 2023 02:38:31.977    24 Dec 2023 02:38:55.486      23.508523917    Earth           Penumbra    48            1353.0351962
+24 Dec 2023 02:38:55.486    24 Dec 2023 03:00:41.575      1306.0895018    Earth           Umbra       48            1353.0351962
+24 Dec 2023 03:00:41.575    24 Dec 2023 03:01:05.012      23.437170452    Earth           Penumbra    48            1353.0351962
+24 Dec 2023 04:13:31.463    24 Dec 2023 04:13:54.967      23.503870075    Earth           Penumbra    49            1353.1763636
+24 Dec 2023 04:13:54.967    24 Dec 2023 04:35:41.207      1306.2400118    Earth           Umbra       49            1353.1763636
+24 Dec 2023 04:35:41.207    24 Dec 2023 04:36:04.639      23.432481720    Earth           Penumbra    49            1353.1763636
+24 Dec 2023 05:48:30.934    24 Dec 2023 05:48:54.435      23.501285410    Earth           Penumbra    50            1353.2170971
+24 Dec 2023 05:48:54.435    24 Dec 2023 06:10:40.721      1306.2856572    Earth           Umbra       50            1353.2170971
+24 Dec 2023 06:10:40.721    24 Dec 2023 06:11:04.151      23.430154484    Earth           Penumbra    50            1353.2170971
+24 Dec 2023 07:23:30.466    24 Dec 2023 07:23:53.970      23.503714800    Earth           Penumbra    51            1353.1064554
+24 Dec 2023 07:23:53.970    24 Dec 2023 07:45:40.140      1306.1696849    Earth           Umbra       51            1353.1064554
+24 Dec 2023 07:45:40.140    24 Dec 2023 07:46:03.573      23.433055670    Earth           Penumbra    51            1353.1064554
+24 Dec 2023 08:58:30.060    24 Dec 2023 08:58:53.570      23.509853811    Earth           Penumbra    52            1352.9037480
+24 Dec 2023 08:58:53.570    24 Dec 2023 09:20:39.525      1305.9542682    Earth           Umbra       52            1352.9037480
+24 Dec 2023 09:20:39.525    24 Dec 2023 09:21:02.964      23.439625930    Earth           Penumbra    52            1352.9037480
+24 Dec 2023 10:33:29.711    24 Dec 2023 10:33:53.228      23.516959674    Earth           Penumbra    53            1352.6686925
+24 Dec 2023 10:33:53.228    24 Dec 2023 10:55:38.933      1305.7048699    Earth           Umbra       53            1352.6686925
+24 Dec 2023 10:55:38.933    24 Dec 2023 10:56:02.380      23.446862865    Earth           Penumbra    53            1352.6686925
+24 Dec 2023 12:08:29.386    24 Dec 2023 12:08:52.908      23.521930352    Earth           Penumbra    54            1352.4770721
+24 Dec 2023 12:08:52.908    24 Dec 2023 12:30:38.412      1305.5034047    Earth           Umbra       54            1352.4770721
+24 Dec 2023 12:30:38.412    24 Dec 2023 12:31:01.863      23.451737047    Earth           Penumbra    54            1352.4770721
+24 Dec 2023 13:43:29.000    24 Dec 2023 13:43:52.524      23.523380316    Earth           Penumbra    55            1352.3956745
+24 Dec 2023 13:43:52.524    24 Dec 2023 14:05:37.943      1305.4189789    Earth           Umbra       55            1352.3956745
+24 Dec 2023 14:05:37.943    24 Dec 2023 14:06:01.396      23.453315254    Earth           Penumbra    55            1352.3956745
+24 Dec 2023 15:18:28.509    24 Dec 2023 15:18:52.033      23.523792706    Earth           Penumbra    56            1352.3838092
+24 Dec 2023 15:18:52.033    24 Dec 2023 15:40:37.439      1305.4056394    Earth           Umbra       56            1352.3838092
+24 Dec 2023 15:40:37.439    24 Dec 2023 15:41:00.893      23.454377032    Earth           Penumbra    56            1352.3838092
+24 Dec 2023 16:53:27.979    24 Dec 2023 16:53:51.505      23.526230583    Earth           Penumbra    57            1352.3442811
+24 Dec 2023 16:53:51.505    24 Dec 2023 17:15:36.866      1305.3604092    Earth           Umbra       57            1352.3442811
+24 Dec 2023 17:15:36.866    24 Dec 2023 17:16:00.323      23.457641259    Earth           Penumbra    57            1352.3442811
+24 Dec 2023 18:28:27.486    24 Dec 2023 18:28:51.016      23.529892426    Earth           Penumbra    58            1352.2598565
+24 Dec 2023 18:28:51.016    24 Dec 2023 18:50:36.284      1305.2682524    Earth           Umbra       58            1352.2598565
+24 Dec 2023 18:50:36.284    24 Dec 2023 18:50:59.746      23.461711721    Earth           Penumbra    58            1352.2598565
+24 Dec 2023 20:03:27.045    24 Dec 2023 20:03:50.578      23.533127422    Earth           Penumbra    59            1352.1453072
+24 Dec 2023 20:03:50.578    24 Dec 2023 20:25:35.726      1305.1473716    Earth           Umbra       59            1352.1453072
+24 Dec 2023 20:25:35.726    24 Dec 2023 20:25:59.190      23.464808101    Earth           Penumbra    59            1352.1453072
+24 Dec 2023 21:38:26.667    24 Dec 2023 21:38:50.205      23.538110359    Earth           Penumbra    60            1351.9423348
+24 Dec 2023 21:38:50.205    24 Dec 2023 22:00:35.140      1304.9347835    Earth           Umbra       60            1351.9423348
+24 Dec 2023 22:00:35.140    24 Dec 2023 22:00:58.609      23.469440883    Earth           Penumbra    60            1351.9423348
+24 Dec 2023 23:13:26.371    24 Dec 2023 23:13:49.917      23.546734080    Earth           Penumbra    61            1351.6389357
+24 Dec 2023 23:13:49.917    24 Dec 2023 23:35:34.532      1304.6144702    Earth           Umbra       61            1351.6389357
+24 Dec 2023 23:35:34.532    24 Dec 2023 23:35:58.010      23.477731424    Earth           Penumbra    61            1351.6389357
+25 Dec 2023 00:48:26.083    25 Dec 2023 00:48:49.638      23.554710299    Earth           Penumbra    62            1351.3995574
+25 Dec 2023 00:48:49.638    25 Dec 2023 01:10:33.997      1304.3594494    Earth           Umbra       62            1351.3995574
+25 Dec 2023 01:10:33.997    25 Dec 2023 01:10:57.483      23.485397722    Earth           Penumbra    62            1351.3995574
+25 Dec 2023 02:23:25.672    25 Dec 2023 02:23:49.228      23.556257703    Earth           Penumbra    63            1351.3798828
+25 Dec 2023 02:23:49.228    25 Dec 2023 02:45:33.565      1304.3369562    Earth           Umbra       63            1351.3798828
+25 Dec 2023 02:45:33.565    25 Dec 2023 02:45:57.052      23.486668838    Earth           Penumbra    63            1351.3798828
+25 Dec 2023 03:58:25.114    25 Dec 2023 03:58:48.667      23.552547768    Earth           Penumbra    64            1351.4937862
+25 Dec 2023 03:58:48.667    25 Dec 2023 04:20:33.125      1304.4583669    Earth           Umbra       64            1351.4937862
+25 Dec 2023 04:20:33.125    25 Dec 2023 04:20:56.608      23.482871521    Earth           Penumbra    64            1351.4937862
+25 Dec 2023 05:33:24.523    25 Dec 2023 05:33:48.073      23.549984163    Earth           Penumbra    65            1351.5320555
+25 Dec 2023 05:33:48.073    25 Dec 2023 05:55:32.574      1304.5015528    Earth           Umbra       65            1351.5320555
+25 Dec 2023 05:55:32.574    25 Dec 2023 05:55:56.055      23.480518511    Earth           Penumbra    65            1351.5320555
+25 Dec 2023 07:08:23.987    25 Dec 2023 07:08:47.539      23.552337801    Earth           Penumbra    66            1351.4153712
+25 Dec 2023 07:08:47.539    25 Dec 2023 07:30:31.919      1304.3797174    Earth           Umbra       66            1351.4153712
+25 Dec 2023 07:30:31.919    25 Dec 2023 07:30:55.402      23.483315972    Earth           Penumbra    66            1351.4153712
+25 Dec 2023 08:43:23.514    25 Dec 2023 08:43:47.073      23.558778560    Earth           Penumbra    67            1351.1954899
+25 Dec 2023 08:43:47.073    25 Dec 2023 09:05:31.220      1304.1464966    Earth           Umbra       67            1351.1954899
+25 Dec 2023 09:05:31.220    25 Dec 2023 09:05:54.710      23.490214697    Earth           Penumbra    67            1351.1954899
+25 Dec 2023 10:18:23.099    25 Dec 2023 10:18:46.665      23.566676199    Earth           Penumbra    68            1350.9336206
+25 Dec 2023 10:18:46.665    25 Dec 2023 10:40:30.534      1303.8686469    Earth           Umbra       68            1350.9336206
+25 Dec 2023 10:40:30.534    25 Dec 2023 10:40:54.032      23.498297471    Earth           Penumbra    68            1350.9336206
+25 Dec 2023 11:53:22.718    25 Dec 2023 11:53:46.291      23.572900391    Earth           Penumbra    69            1350.7014094
+25 Dec 2023 11:53:46.291    25 Dec 2023 12:15:29.915      1303.6240794    Earth           Umbra       69            1350.7014094
+25 Dec 2023 12:15:29.915    25 Dec 2023 12:15:53.419      23.504429567    Earth           Penumbra    69            1350.7014094
+25 Dec 2023 13:28:22.290    25 Dec 2023 13:28:45.866      23.575552949    Earth           Penumbra    70            1350.5747281
+25 Dec 2023 13:28:45.866    25 Dec 2023 13:50:29.358      1303.4920387    Earth           Umbra       70            1350.5747281
+25 Dec 2023 13:50:29.358    25 Dec 2023 13:50:52.865      23.507136502    Earth           Penumbra    70            1350.5747281
+25 Dec 2023 15:03:21.756    25 Dec 2023 15:03:45.333      23.576557206    Earth           Penumbra    71            1350.5321260
+25 Dec 2023 15:03:45.333    25 Dec 2023 15:25:28.779      1303.4468619    Earth           Umbra       71            1350.5321260
+25 Dec 2023 15:25:28.779    25 Dec 2023 15:25:52.288      23.508706852    Earth           Penumbra    71            1350.5321260
+25 Dec 2023 16:38:21.168    25 Dec 2023 16:38:44.747      23.579315376    Earth           Penumbra    72            1350.4740416
+25 Dec 2023 16:38:44.747    25 Dec 2023 17:00:28.129      1303.3824223    Earth           Umbra       72            1350.4740416
+25 Dec 2023 17:00:28.129    25 Dec 2023 17:00:51.642      23.512303946    Earth           Penumbra    72            1350.4740416
+25 Dec 2023 18:13:20.609    25 Dec 2023 18:13:44.193      23.583671870    Earth           Penumbra    73            1350.3673842
+25 Dec 2023 18:13:44.193    25 Dec 2023 18:35:27.459      1303.2665533    Earth           Umbra       73            1350.3673842
+25 Dec 2023 18:35:27.459    25 Dec 2023 18:35:50.976      23.517158953    Earth           Penumbra    73            1350.3673842
+
+Number of individual events : 219
+Number of total events      : 73
+Maximum duration (s)        :   1355.8441266
+Maximum duration at the 5th eclipse.
 
 
-%----------------------------------------
-%---------- Spacecraft
-%----------------------------------------
-
-Create Spacecraft Boira;
-GMAT Boira.DateFormat = UTCGregorian;
-GMAT Boira.Epoch = '24 Dec 2023 00:00:00.000';
-GMAT Boira.CoordinateSystem = EarthMJ2000Eq;
-GMAT Boira.DisplayStateType = Keplerian;
-GMAT Boira.SMA = 6900.139999999999;
-GMAT Boira.ECC = 0.001074569999999994;
-GMAT Boira.INC = 97.49042110000001;
-GMAT Boira.RAAN = 181.2236382099999;
-GMAT Boira.AOP = 0;
-GMAT Boira.TA = 360;
-GMAT Boira.DryMass = 1;
-GMAT Boira.Cd = 2.2;
-GMAT Boira.Cr = 1.8;
-GMAT Boira.DragArea = 0.01;
-GMAT Boira.SRPArea = 1;
-GMAT Boira.SPADDragScaleFactor = 1;
-GMAT Boira.SPADSRPScaleFactor = 1;
-GMAT Boira.NAIFId = -10001001;
-GMAT Boira.NAIFIdReferenceFrame = -9001001;
-GMAT Boira.OrbitColor = Red;
-GMAT Boira.TargetColor = Teal;
-GMAT Boira.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
-GMAT Boira.CdSigma = 1e+70;
-GMAT Boira.CrSigma = 1e+70;
-GMAT Boira.Id = 'SatId';
-GMAT Boira.Attitude = CoordinateSystemFixed;
-GMAT Boira.SPADSRPInterpolationMethod = Bilinear;
-GMAT Boira.SPADSRPScaleFactorSigma = 1e+70;
-GMAT Boira.SPADDragInterpolationMethod = Bilinear;
-GMAT Boira.SPADDragScaleFactorSigma = 1e+70;
-GMAT Boira.ModelFile = 'aura.3ds';
-GMAT Boira.ModelOffsetX = 0;
-GMAT Boira.ModelOffsetY = 0;
-GMAT Boira.ModelOffsetZ = 0;
-GMAT Boira.ModelRotationX = 0;
-GMAT Boira.ModelRotationY = 0;
-GMAT Boira.ModelRotationZ = 0;
-GMAT Boira.ModelScale = 1;
-GMAT Boira.AttitudeDisplayStateType = 'Quaternion';
-GMAT Boira.AttitudeRateDisplayStateType = 'AngularVelocity';
-GMAT Boira.AttitudeCoordinateSystem = EarthMJ2000Eq;
-GMAT Boira.EulerAngleSequence = '321';
-
-%----------------------------------------
-%---------- ForceModels
-%----------------------------------------
-
-Create ForceModel DefaultProp_ForceModel;
-GMAT DefaultProp_ForceModel.CentralBody = Earth;
-GMAT DefaultProp_ForceModel.PrimaryBodies = {Earth};
-GMAT DefaultProp_ForceModel.SRP = Off;
-GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
-GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
-GMAT DefaultProp_ForceModel.GravityField.Earth.Degree = 4;
-GMAT DefaultProp_ForceModel.GravityField.Earth.Order = 4;
-GMAT DefaultProp_ForceModel.GravityField.Earth.StmLimit = 100;
-GMAT DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
-GMAT DefaultProp_ForceModel.GravityField.Earth.TideModel = 'None';
-GMAT DefaultProp_ForceModel.Drag.AtmosphereModel = MSISE90;
-GMAT DefaultProp_ForceModel.Drag.HistoricWeatherSource = 'ConstantFluxAndGeoMag';
-GMAT DefaultProp_ForceModel.Drag.PredictedWeatherSource = 'ConstantFluxAndGeoMag';
-GMAT DefaultProp_ForceModel.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
-GMAT DefaultProp_ForceModel.Drag.SchattenFile = 'SchattenPredict.txt';
-GMAT DefaultProp_ForceModel.Drag.F107 = 150;
-GMAT DefaultProp_ForceModel.Drag.F107A = 150;
-GMAT DefaultProp_ForceModel.Drag.MagneticIndex = 3;
-GMAT DefaultProp_ForceModel.Drag.SchattenErrorModel = 'Nominal';
-GMAT DefaultProp_ForceModel.Drag.SchattenTimingModel = 'NominalCycle';
-GMAT DefaultProp_ForceModel.Drag.DragModel = 'Spherical';
-
-%----------------------------------------
-%---------- Propagators
-%----------------------------------------
-
-Create Propagator DefaultProp;
-GMAT DefaultProp.FM = DefaultProp_ForceModel;
-GMAT DefaultProp.Type = RungeKutta89;
-GMAT DefaultProp.InitialStepSize = 60;
-GMAT DefaultProp.Accuracy = 9.999999999999999e-12;
-GMAT DefaultProp.MinStep = 0.001;
-GMAT DefaultProp.MaxStep = 2700;
-GMAT DefaultProp.MaxStepAttempts = 50;
-GMAT DefaultProp.StopIfAccuracyIsViolated = true;
-
-%----------------------------------------
-%---------- EventLocators
-%----------------------------------------
-
-Create EclipseLocator Eclipses;
-GMAT Eclipses.Spacecraft = Boira;
-GMAT Eclipses.Filename = 'C:\Users\sergi\OneDrive\Documentos\GitHub\Boira_1U_CubeSat\mission analysis\GMAT Scenarios\eclipse_report';
-GMAT Eclipses.OccultingBodies = {Earth};
-GMAT Eclipses.InputEpochFormat = 'TAIModJulian';
-GMAT Eclipses.InitialEpoch = '21545';
-GMAT Eclipses.StepSize = 10;
-GMAT Eclipses.FinalEpoch = '21545.138';
-GMAT Eclipses.UseLightTimeDelay = true;
-GMAT Eclipses.UseStellarAberration = true;
-GMAT Eclipses.WriteReport = true;
-GMAT Eclipses.RunMode = Automatic;
-GMAT Eclipses.UseEntireInterval = true;
-GMAT Eclipses.EclipseTypes = {'Umbra', 'Penumbra', 'Antumbra'};
-
-%----------------------------------------
-%---------- Subscribers
-%----------------------------------------
-
-Create OrbitView DefaultOrbitView;
-GMAT DefaultOrbitView.SolverIterations = Current;
-GMAT DefaultOrbitView.UpperLeft = [ 0.002941176470588235 0 ];
-GMAT DefaultOrbitView.Size = [ 0.5 0.4502487562189055 ];
-GMAT DefaultOrbitView.RelativeZOrder = 42;
-GMAT DefaultOrbitView.Maximized = false;
-GMAT DefaultOrbitView.Add = {Boira, Earth};
-GMAT DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
-GMAT DefaultOrbitView.DrawObject = [ true true ];
-GMAT DefaultOrbitView.DataCollectFrequency = 1;
-GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
-GMAT DefaultOrbitView.NumPointsToRedraw = 0;
-GMAT DefaultOrbitView.ShowPlot = true;
-GMAT DefaultOrbitView.MaxPlotPoints = 20000;
-GMAT DefaultOrbitView.ShowLabels = true;
-GMAT DefaultOrbitView.ViewPointReference = Earth;
-GMAT DefaultOrbitView.ViewPointVector = [ 30000 0 0 ];
-GMAT DefaultOrbitView.ViewDirection = Earth;
-GMAT DefaultOrbitView.ViewScaleFactor = 1;
-GMAT DefaultOrbitView.ViewUpCoordinateSystem = EarthMJ2000Eq;
-GMAT DefaultOrbitView.ViewUpAxis = Z;
-GMAT DefaultOrbitView.EclipticPlane = Off;
-GMAT DefaultOrbitView.XYPlane = On;
-GMAT DefaultOrbitView.WireFrame = Off;
-GMAT DefaultOrbitView.Axes = On;
-GMAT DefaultOrbitView.Grid = Off;
-GMAT DefaultOrbitView.SunLine = Off;
-GMAT DefaultOrbitView.UseInitialView = On;
-GMAT DefaultOrbitView.StarCount = 7000;
-GMAT DefaultOrbitView.EnableStars = On;
-GMAT DefaultOrbitView.EnableConstellations = On;
-
-Create GroundTrackPlot DefaultGroundTrackPlot;
-GMAT DefaultGroundTrackPlot.SolverIterations = Current;
-GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.002941176470588235 0.4552238805970149 ];
-GMAT DefaultGroundTrackPlot.Size = [ 0.5 0.4502487562189055 ];
-GMAT DefaultGroundTrackPlot.RelativeZOrder = 40;
-GMAT DefaultGroundTrackPlot.Maximized = false;
-GMAT DefaultGroundTrackPlot.Add = {Boira};
-GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
-GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
-GMAT DefaultGroundTrackPlot.NumPointsToRedraw = 0;
-GMAT DefaultGroundTrackPlot.ShowPlot = true;
-GMAT DefaultGroundTrackPlot.MaxPlotPoints = 20000;
-GMAT DefaultGroundTrackPlot.CentralBody = Earth;
-GMAT DefaultGroundTrackPlot.TextureMap = 'ModifiedBlueMarble.jpg';
-
-
-%----------------------------------------
-%---------- Mission Sequence
-%----------------------------------------
-
-BeginMissionSequence;
-Propagate 'Mission' DefaultProp(Boira) {Boira.Earth.RMAG = 6500};

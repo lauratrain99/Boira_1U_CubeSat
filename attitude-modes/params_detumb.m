@@ -1,11 +1,9 @@
 clear;clc;close all;
 
-% Add paths
-
-addpath dynamics/
-addpath control/
-addpath navigation/
-addpath conversion/
+addpath ../control
+addpath ../conversion
+addpath ../dynamics
+addpath ../navigation
 
 % Initial conditions
 % orbital parameter
@@ -13,18 +11,22 @@ mu = 3.986e+14;
 a = 6371 + 600;
 e = 0;
 Omega = 0;
-% inc = 50*pi/180;
-inc = 0;
+% Omega = 10*pi/180;
+inc = 50*pi/180;
+% inc = 0;
 omega = 0;
 theta = 0;
 
-[r0, v0] = coe2rv(3.986e+5, a, e, Omega, inc, omega, theta);
-
+[r0, v0, k3, DCM_30] = coe2rv(3.986e+5, a, e, Omega, inc, omega, theta);
+q30 = dcm2quat(DCM_30);
 r0 = r0*1000;
 v0 = v0*1000;
 
 % orbital period
 Torb = 2*pi*sqrt(norm(r0)^3/mu);
+
+% angular velocity in-orbit
+n = sqrt(mu/norm(r0)^3);
 
 year = 2024;
 month = 1;
@@ -35,19 +37,20 @@ sec = 0;
 t0 = [year,month,day,hour,min,sec];
 
 % initial angular velocity from launcher deploy
-wx = 0; wy = 0; wz = 0;
-w0 = deg2rad([wx; wy; wz]);
-euler0 = [20,10,45];
-% euler0 = deg2rad([0,0,0]);
+wx0 = 180; wy0 = -180; wz0 = 90;
+% wx0 = 1; wy0 = 0.5; wz0 = -3;
+w0 = deg2rad([wx0; wy0; wz0]) + n*k3;
+% euler0 = [10,120,-50];
+euler0 = deg2rad([0,0,0]);
 q0 = angle2quat(euler0(3)*pi/180,euler0(2)*pi/180,euler0(1)*pi/180,'ZYX');
 
 % Geometric and massic properties
 % Iz>Iy, Iz>Ix stable configuration. h>w>d
 % geometric dimensions of the S/C
 m = 2;
-w = 0.1;
-h = 0.1;
-d = 0.1;
+w = 0.101;
+h = 0.11;
+d = 0.103;
 
 % inertia tensor of the S/C
 Ix = m/12 * (h^2 + d^2);
@@ -62,7 +65,10 @@ Isc = [Ix, Ixy, Ixz; Ixy, Iy, Iyz; Ixz, Iyz, Iz];
 Irw = [5.02e-5, 0, 0; 0, 9.41e-5, 0; 0, 0, 5.02e-5];
 
 % Controller gain
-K_Bdot = 1000;
+K_Bdot = 10000;
+beta = K_Bdot;
+% alpha = beta/10000;
+alpha = 10;
 
 % yaw transfer function
 numZ = [0, 0, 1];
@@ -99,24 +105,46 @@ Kp = [KpX,0,0;0,KpY,0;0,0,KpZ];
 Ki = [KiX,0,0;0,KiY,0;0,0,KiZ];
 Kd = [KdX,0,0;0,KdY,0;0,0,KdZ];
 
-
-% Thruster specifications
-Fmax = 25e-3;
-Larm = 5e-2;
-t_thrust = 1;
-Tmax = Fmax*Larm;
-
 % desired angles
 yaw = 0;
 pitch = 0;
 roll = 0;
 
+% % Thruster specifications
+% Fmax = 25e-3;
+% Larm = 5e-2;
+% t_thrust = 1;
+% Tmax = Fmax*Larm;
+% 
+% % desired angular velocities and times between burns
+% wz = Tmax*t_thrust/Iz;
+% tz = abs(euler0(3) - deg2rad(yaw))/wz;
+% wy = Tmax*t_thrust/Iy;
+% ty = abs(euler0(2) - deg2rad(pitch))/wy;
+% wx = Tmax*t_thrust/Ix;
+% tx = abs(euler0(1) - deg2rad(roll))/wx;
+% 
+% % initial and final times for each thruster
+% t0z = 10;
+% tfz = t0z + tz;
+% t0y = tfz + 10;
+% tfy = t0y + ty;
+% t0x = tfy + 10;
+% tfx = t0x + tx;
+ 
+% Maximum and minimum magnetic moment: magnetorquer
+Max_magmom = 0.2; %Am^2
+Min_magmom = -0.2; %Am^2
+
+% Torque for magnetorquer;
+Tmax = 10e-6*Max_magmom;
+
 % desired angular velocities and times between burns
-wz = Tmax*t_thrust/Iz;
+wz = Tmax/Iz;
 tz = abs(euler0(3) - deg2rad(yaw))/wz;
-wy = Tmax*t_thrust/Iy;
+wy = Tmax/Iy;
 ty = abs(euler0(2) - deg2rad(pitch))/wy;
-wx = Tmax*t_thrust/Ix;
+wx = Tmax/Ix;
 tx = abs(euler0(1) - deg2rad(roll))/wx;
 
 % initial and final times for each thruster
@@ -126,11 +154,6 @@ t0y = tfz + 10;
 tfy = t0y + ty;
 t0x = tfy + 10;
 tfx = t0x + tx;
-
-
-% Maximum and minimum magnetic moment: magnetorquer
-Max_magmom = 0.2; %Am^2
-Min_magmom = -0.2; %Am^2
 
 % IMU ADIS16460
 misalign = 0.05; %deg
@@ -154,3 +177,22 @@ mag.quantization = 4.35e-3; % Gauss
 mag.power_noise = ([2e-3,2e-3,2e-3]).^2; %Gauss^2/Hz
 
 
+A = zeros(6,6);
+A(1,4) = 1;
+A(2,5) = 1;
+A(3,6) = 1;
+A(4,5) = (Iy - Iz)/Ix * w0(3);
+A(4,6) = (Iy - Iz)/Ix * w0(2);
+A(5,4) = (Iz - Ix)/Iy * w0(3);
+A(5,6) = (Iz - Ix)/Iy * w0(1);
+A(6,4) = (Ix - Iy)/Iz * w0(2);
+A(6,5) = (Ix - Iy)/Iz * w0(1);
+
+B = zeros(6,3);
+B(4,1) = 1/Ix;
+B(5,2) = 1/Iy;
+B(6,3) = 1/Iz;
+
+% the system is controllable if rank(P) = 6
+P = ctrb(A,B);
+rank(P)

@@ -14,8 +14,8 @@ GMAT Boira.DisplayStateType = Keplerian;
 GMAT Boira.SMA = 6900.14;
 GMAT Boira.ECC = 0.001074569999999871;
 GMAT Boira.INC = 97.49042110000001;
-GMAT Boira.RAAN = 181.2282231999998;
-GMAT Boira.AOP = 0;
+GMAT Boira.RAAN = 271.22822317;
+GMAT Boira.AOP = 360;
 GMAT Boira.TA = 360;
 GMAT Boira.DryMass = 1;
 GMAT Boira.Cd = 2.2;
@@ -49,6 +49,7 @@ GMAT Boira.AttitudeDisplayStateType = 'Quaternion';
 GMAT Boira.AttitudeRateDisplayStateType = 'AngularVelocity';
 GMAT Boira.AttitudeCoordinateSystem = EarthMJ2000Eq;
 GMAT Boira.EulerAngleSequence = '321';
+
 
 
 %----------------------------------------
@@ -93,12 +94,24 @@ GMAT DefaultProp.MaxStepAttempts = 50;
 GMAT DefaultProp.StopIfAccuracyIsViolated = true;
 
 %----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem SunJ2000;
+GMAT SunJ2000.Origin = Sun;
+GMAT SunJ2000.Axes = MJ2000Ec;
+
+Create CoordinateSystem earthSTARS;
+GMAT earthSTARS.Origin = Earth;
+GMAT earthSTARS.Axes = BodySpinSun;
+
+%----------------------------------------
 %---------- EventLocators
 %----------------------------------------
 
 Create EclipseLocator Eclipses;
 GMAT Eclipses.Spacecraft = Boira;
-GMAT Eclipses.Filename = 'C:\Users\sergi\OneDrive\Documentos\GitHub\Boira_1U_CubeSat\mission analysis\GMAT Scenarios\eclipse_report';
+GMAT Eclipses.Filename = 'C:\Users\Laura\Documents\MiSE\Bimester 4\Spacecraft Predesign\Boira_1U_CubeSat\mission analysis\GMAT Scenarios\eclipse.script';
 GMAT Eclipses.OccultingBodies = {Earth};
 GMAT Eclipses.InputEpochFormat = 'TAIModJulian';
 GMAT Eclipses.InitialEpoch = '21545';
@@ -117,13 +130,13 @@ GMAT Eclipses.EclipseTypes = {'Umbra', 'Penumbra', 'Antumbra'};
 
 Create OrbitView DefaultOrbitView;
 GMAT DefaultOrbitView.SolverIterations = Current;
-GMAT DefaultOrbitView.UpperLeft = [ 0.001764705882352941 0 ];
-GMAT DefaultOrbitView.Size = [ 0.5 0.4502487562189055 ];
-GMAT DefaultOrbitView.RelativeZOrder = 94;
+GMAT DefaultOrbitView.UpperLeft = [ 0.006470588235294118 0.08700696055684455 ];
+GMAT DefaultOrbitView.Size = [ 0.7335294117647059 0.7529002320185615 ];
+GMAT DefaultOrbitView.RelativeZOrder = 1073;
 GMAT DefaultOrbitView.Maximized = false;
-GMAT DefaultOrbitView.Add = {Boira, Earth};
-GMAT DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
-GMAT DefaultOrbitView.DrawObject = [ true true ];
+GMAT DefaultOrbitView.Add = {Boira, Earth, Sun};
+GMAT DefaultOrbitView.CoordinateSystem = earthSTARS;
+GMAT DefaultOrbitView.DrawObject = [ true true true ];
 GMAT DefaultOrbitView.DataCollectFrequency = 1;
 GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
 GMAT DefaultOrbitView.NumPointsToRedraw = 0;
@@ -131,28 +144,28 @@ GMAT DefaultOrbitView.ShowPlot = true;
 GMAT DefaultOrbitView.MaxPlotPoints = 20000;
 GMAT DefaultOrbitView.ShowLabels = true;
 GMAT DefaultOrbitView.ViewPointReference = Earth;
-GMAT DefaultOrbitView.ViewPointVector = [ 30000 0 0 ];
+GMAT DefaultOrbitView.ViewPointVector = [ 20000 0 0 ];
 GMAT DefaultOrbitView.ViewDirection = Earth;
 GMAT DefaultOrbitView.ViewScaleFactor = 1;
-GMAT DefaultOrbitView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = earthSTARS;
 GMAT DefaultOrbitView.ViewUpAxis = Z;
 GMAT DefaultOrbitView.EclipticPlane = Off;
-GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.XYPlane = Off;
 GMAT DefaultOrbitView.WireFrame = Off;
 GMAT DefaultOrbitView.Axes = On;
 GMAT DefaultOrbitView.Grid = Off;
-GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.SunLine = On;
 GMAT DefaultOrbitView.UseInitialView = On;
 GMAT DefaultOrbitView.StarCount = 7000;
 GMAT DefaultOrbitView.EnableStars = On;
-GMAT DefaultOrbitView.EnableConstellations = On;
+GMAT DefaultOrbitView.EnableConstellations = Off;
 
 Create GroundTrackPlot DefaultGroundTrackPlot;
 GMAT DefaultGroundTrackPlot.SolverIterations = Current;
-GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.002352941176470588 0.4539800995024876 ];
-GMAT DefaultGroundTrackPlot.Size = [ 0.5 0.4502487562189055 ];
-GMAT DefaultGroundTrackPlot.RelativeZOrder = 96;
-GMAT DefaultGroundTrackPlot.Maximized = false;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.001764705882352941 0.41415313225058 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.5 0.4118329466357308 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 978;
+GMAT DefaultGroundTrackPlot.Maximized = true;
 GMAT DefaultGroundTrackPlot.Add = {Boira};
 GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
 GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
