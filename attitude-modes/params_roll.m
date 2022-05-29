@@ -1,3 +1,6 @@
+% This script contains the parameters needed for running roll_maneuver.slx
+% Author: Laura Train
+
 clear;clc;close all;
 
 addpath ../control
@@ -5,15 +8,12 @@ addpath ../conversion
 addpath ../dynamics
 addpath ../navigation
 
-% Initial conditions
-% orbital parameter
+% orbital parameters
 mu = 3.986e+14;
 a = 6371 + 600;
 e = 0;
 Omega = 0;
-% Omega = 10*pi/180;
 inc = 0;
-% inc = 0;
 omega = 0;
 theta = 0;
 
@@ -28,6 +28,7 @@ Torb = 2*pi*sqrt(norm(r0)^3/mu);
 % angular velocity in-orbit
 n = sqrt(mu/norm(r0)^3);
 
+% Parameters used for secular variations of mag field
 year = 2024;
 month = 1;
 day = 1;
@@ -36,13 +37,10 @@ min = 0;
 sec = 0;
 t0 = [year,month,day,hour,min,sec];
 
-% initial angular velocity from launcher deploy
-% wx0 = 3; wy0 = 10; wz0 = -7;
-% wx0 = 0; wy0 = 0; wz0 = 0;
-% w0 = deg2rad([wx0; wy0; wz0]) + n*k3;
+% initial angular velocity
 w0 = [0,0,n];
 
-% euler0 = [10,120,-50];
+% attitude initial conditions
 euler0 = [0,0,0];
 eulerdes = [-45,0,0];
 
@@ -50,22 +48,14 @@ q0 = angle2quat(euler0(3)*pi/180,euler0(2)*pi/180,euler0(1)*pi/180,'ZYX');
 qdes = angle2quat(eulerdes(3)*pi/180,eulerdes(2)*pi/180,eulerdes(1)*pi/180,'ZYX');
 wdes = quatrotate(qdes,w0);
 
-% Geometric and massic properties
-% Iz>Iy, Iz>Ix stable configuration. h>w>d
-% geometric dimensions of the S/C
-m = 2;
-w = 0.11;
-h = 0.11;
-d = 0.105;
+% Inertia properties
+Isc = [0.002, -3.759e-5, 1.047e-5;
+       -3.759e-5, 0.002, -4.956e-6;
+       1.047e-5, -4.956e-6, 0.002];
 
-% inertia tensor of the S/C
-Ix = m/12 * (h^2 + d^2);
-Iy = m/12 * (w^2 + d^2);
-Iz = m/12 * (h^2 + w^2);
-Ixy = 0;
-Ixz = 0;
-Iyz = 0;
-Isc = [Ix, Ixy, Ixz; Ixy, Iy, Iyz; Ixz, Iyz, Iz];
+Ix = Isc(1,1);
+Iy = Isc(2,2);
+Iz = Isc(3,3);
 
  
 % Maximum and minimum magnetic moment: magnetorquer
@@ -76,7 +66,6 @@ Min_magmom = -0.2; %Am^2
 % Torque for magnetorquer;
 Tmax = 10e-6*Max_magmom;
 
-% desired angular velocities and times between burns
 % desired angular velocities and times between burns
 wx = sign(eulerdes(1)*pi/180 - euler0(1))*Tmax/Ix;
 wy = sign(eulerdes(2)*pi/180 - euler0(2))*Tmax/Iy;
@@ -143,7 +132,8 @@ Kp = [KpX,0,0;0,KpY,0;0,0,KpZ];
 Ki = [KiX,0,0;0,KiY,0;0,0,KiZ];
 Kd = [KdX,0,0;0,KdY,0;0,0,KdZ];
 
-% IMU ADIS16460
+
+%% SENSOR MODELING
 misalign = 0.05; %deg
 max_ref_temp = 70; %ºC
 
@@ -162,6 +152,3 @@ acc.temp_bias = 0.05/1000;%g/ºC
 mag.temp_bias = -0.3/100; % %/ºC
 mag.quantization = 4.35e-3; % Gauss
 mag.power_noise = ([2e-3,2e-3,2e-3]).^2; %Gauss^2/Hz
-
-
-
