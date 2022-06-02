@@ -17,12 +17,6 @@ inc = 0;
 omega = 0;
 theta = 0;
 
-% orbital period
-Torb = 2*pi*sqrt(norm(r0)^3/mu);
-
-% angular velocity in-orbit
-n = sqrt(mu/norm(r0)^3);
-
 % Parameters used for secular variations of mag field
 year = 2024;
 month = 1;
@@ -37,6 +31,12 @@ t0 = [year,month,day,hour,min,sec];
 q30 = dcm2quat(DCM_30);
 r0 = r0*1000;
 v0 = v0*1000;
+
+% orbital period
+Torb = 2*pi*sqrt(norm(r0)^3/mu);
+
+% angular velocity in-orbit
+n = sqrt(mu/norm(r0)^3);
 
 % initial angular velocity from launcher deploy
 wx0 = 180; wy0 = -180; wz0 = 90;
