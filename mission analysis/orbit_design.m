@@ -4,7 +4,7 @@
 
 %% Orbit design script
 % This script provides an interface to trade-off orbital elements 
-% for sun-synchronous orbits. 
+% for Sun-synchronous orbits. 
 
 % Orbits in consideration are sun-synchronous from 300 km to 800 km
 
@@ -39,12 +39,11 @@ delta = deg2rad(2);                             % Solar declination
 eps = 0;                                        % Equation of time
 
 % Orbit requirements 
-LTAN = 6;                                      % Mean Local Time of the Ascending Node
-phi = deg2rad(40.304665);                       % Latitude of interest for the LTAN
+LTAN = 6;                                       % Mean Local Time of the Ascending Node
+phi = deg2rad(40.304665);                       % Latitude of interest for the LTAN (Madrid)
 
 %% Argument of perigee design 
-% In general, this element cannot be freely selected and depends on the
-% launcher 
+% In general, this element cannot be freely selected and depends on the launcher 
 
 % To freeze the eccentricity, select the AoP as
 omega_d = 270;                         
@@ -58,7 +57,7 @@ a_d = Re+522e3;                                 % Desired orbital SMA
 elements(1) = a_d; 
 
 %% Inclination selection
-%General inclination evaluation
+% General inclination evaluation
 dOmega = Earth_Omega;                           % Orbital precession rate
 dh = 100;                                       % Altitude step [m]
 a_max = 1000e3;                                 % Orbital altitude (circular orbit) over the geoid
@@ -79,14 +78,16 @@ i_d = acos((-2*dOmega*p_d^2)/(3*J2*Re^2*n_d));  % Desired inclination
 tol = 1e-20;                                    % Convergence tolerance
 error = 1;                                      % Initial error
 
-%Iterative scheme
+% Iterative scheme
 while (error >= tol)
     % Frozen AoP eccentricity (J3 perturbed motion)
     e = (-1/2)*(J3/J2)*(Re/a_d)*sin(i_d);
 
+    p_d = a_d*(1-e^2);                                                     % Semilatus rectum of the orbit
+
     % J2 perturbed mean motion
     n_p  = n_d*(1+(3/2)*J2*(Re/a_d)^2*sqrt(1-e^2)*(1-(3/2)*sin(i_d)^2));   % First order perturbation in the mean motion due to the J2
-    i_p = acos((-2*dOmega*p_d^2)/(3*J2*Re^2*n_p));
+    i_p = acos((-2*dOmega*p_d^2)/(3*J2*Re^2*n_p));                         % Sun-synchronous condition
 
     % Convergence criteria
     error = abs(i_p-i_d);
@@ -96,8 +97,7 @@ end
 elements(3) = i_d;
 
 %% Eccentricity design 
-% In general, this element cannot be freely selected and depends on the
-% launcher and the uncertainty in the injection point 
+% In general, this element cannot be freely selected and depends on the launcher and the uncertainty in the injection point 
 
 % To freeze the AoP, select the eccentricity as
 e_d = (-1/2)*J3/J2*(Re/a_d)*sin(i_d);
@@ -173,6 +173,15 @@ maxIAA = [IAA(1,1) IAA(2,end)];
 % Relative IAA
 IAA = IAA/IAA(1,1);
 
+% Number of communications 
+S = 510e12; 
+D = pi*( (min(rmax(2,:))-Re)*tan(deg2rad(5)) )^2;
+Communications = 1.15*floor(S/D);
+
+% Number of payload data 
+PL_data = 48;
+Data = Communications*PL_data/(1024)^2;
+
 %% Results
 fprintf("LTAN: %.4f h \n", LTAN);
 fprintf("Orbital SMA: %.8f km \n", (a_d/1e3));
@@ -182,7 +191,8 @@ fprintf("Orbital RAAN: %.8f deg \n", RAAN_d);
 fprintf("Orbital AoP: %.8f deg \n", omega_d);
 
 fprintf("Time in shadow: %.4f min \n", dTimeShadow/60);
-fprintf("RGT cycle: %d days \n", cycle_days);
+
+fprintf("Size of payload data: %.4f MB \n", Data);
 
 figure(1) 
 hold on
@@ -192,8 +202,8 @@ hold off
 grid on
 xlabel('Orbital altitude over the geoid (km)'); 
 ylabel('Orbital inclination (deg)'); 
-legend('Sun-synchronous orbit', 'Design point for Boira');
-title('Orbit design point for Boira');
+legend('Sun-synchronous orbit', 'Design point for BOIRA');
+title('Orbit design point for BOIRA');
 
 figure(2) 
 hold on

@@ -1,5 +1,5 @@
 %% BOIRA MISSION %% 
-% Sergio, Mission Analysis MiSE
+% Sergio, BOIRA Mission Analysis, MiSE
 % 19/04/22
 
 %% Eclipse Analysis
